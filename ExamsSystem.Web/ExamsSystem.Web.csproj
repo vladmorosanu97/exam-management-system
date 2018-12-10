@@ -12,9 +12,11 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ExamsSystem.BusinessLogic.Implementation\ExamsSystem.BusinessLogic.Implementation.csproj" />
     <ProjectReference Include="..\ExamsSystem.Ioc\ExamsSystem.Ioc.csproj" />
   </ItemGroup>
 

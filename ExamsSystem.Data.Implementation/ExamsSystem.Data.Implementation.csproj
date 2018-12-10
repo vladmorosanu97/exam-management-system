@@ -9,4 +9,8 @@
     <Folder Include="Migrations\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ExamsSystem.Data.Interfaces\ExamsSystem.Data.Interfaces.csproj" />
+  </ItemGroup>
+
 </Project>

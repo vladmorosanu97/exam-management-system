@@ -6,7 +6,10 @@
 
   <ItemGroup>
     <Folder Include="Mappers\" />
-    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ExamsSystem.BusinessLogic.Interfaces\ExamsSystem.BusinessLogic.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>
