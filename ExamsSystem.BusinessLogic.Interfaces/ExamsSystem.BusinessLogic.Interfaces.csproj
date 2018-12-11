@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ExamsSystem.BusinessLogic.Models\ExamsSystem.BusinessLogic.Models.csproj" />
+  </ItemGroup>
+
 </Project>

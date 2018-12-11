@@ -4,7 +4,12 @@ using System.Text;
 
 namespace ExamsSystem.BusinessLogic.Models
 {
-    class StudentCourseBlModel
+    public class StudentCourseBlModel
     {
+        public int StudentId { get; set; }
+        public StudentBlModel Student { get; set; }
+
+        public int CourseId { get; set; }
+        public CourseBlModel Course { get; set; }
     }
 }

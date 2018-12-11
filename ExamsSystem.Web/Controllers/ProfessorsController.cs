@@ -13,10 +13,13 @@ namespace ExamsSystem.Web.Controllers
     public class ProfessorsController : ControllerBase
     {
         private readonly IExamService _examService;
+        private readonly ICourseService _courseService;
 
-        public ProfessorsController(IExamService examService)
+        public ProfessorsController(IExamService examService,
+            ICourseService courseService)
         {
             _examService = examService;
+            _courseService = courseService;
         }
 
 
@@ -25,6 +28,19 @@ namespace ExamsSystem.Web.Controllers
         {
             _examService.GetData();
             return Ok();
+        }
+
+        [HttpGet("{professorId}/courses")]
+        public IActionResult GetCoursesByProfessorId(int professorId)
+        {
+            try
+            {
+                return Ok(_courseService.GetCoursesByProfessorId(professorId));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
