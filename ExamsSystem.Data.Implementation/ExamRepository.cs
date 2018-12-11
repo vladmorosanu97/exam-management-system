@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using ExamsSystem.Data.Interfaces;
+using ExamsSystem.Data.Models.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace ExamsSystem.Data.Implementation
@@ -19,6 +17,11 @@ namespace ExamsSystem.Data.Implementation
         public void GetDataTest()
         {
             var items = _databaseContext.Professors.Include(a => a.Courses).ThenInclude(c => c.Exams).Where(a => a.Id == 1);
+        }
+
+        public Exam GetExamById(int id)
+        {
+            return _databaseContext.Exams.Find(id);
         }
     }
 }

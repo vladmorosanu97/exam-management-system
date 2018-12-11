@@ -1,6 +1,6 @@
 ﻿using ExamsSystem.BusinessLogic.Interfaces;
-using ExamsSystem.Data.Implementation;
 using ExamsSystem.Data.Interfaces;
+using ExamsSystem.Data.Models.Models;
 
 namespace ExamsSystem.BusinessLogic.Implementation.Services
 {
@@ -16,6 +16,11 @@ namespace ExamsSystem.BusinessLogic.Implementation.Services
         public void GetData()
         {
             _examRepository.GetDataTest();
+        }
+
+        public Exam GetExamById(int id)
+        {
+            return _examRepository.GetExamById(id);
         }
     }
 }

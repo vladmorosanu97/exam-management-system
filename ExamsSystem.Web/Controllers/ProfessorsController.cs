@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using ExamsSystem.BusinessLogic.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExamsSystem.Web.Controllers
@@ -36,6 +32,19 @@ namespace ExamsSystem.Web.Controllers
             try
             {
                 return Ok(_courseService.GetCoursesByProfessorId(professorId));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("{professorId}/courses/{courseId}/exams/{examId}")]
+        public IActionResult GetById(int examId)
+        {
+            try
+            {
+                return Ok(_examService.GetExamById(examId));
             }
             catch (Exception ex)
             {

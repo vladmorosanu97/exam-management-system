@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ExamsSystem.BusinessLogic.Models\ExamsSystem.BusinessLogic.Models.csproj" />
+    <ProjectReference Include="..\ExamsSystem.Data.Models\ExamsSystem.Data.Models.csproj" />
   </ItemGroup>
 
 </Project>
