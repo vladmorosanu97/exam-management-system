@@ -6,5 +6,6 @@ namespace ExamsSystem.BusinessLogic.Interfaces
 {
     public interface IExamService
     {
+        void GetData();
     }
 }

@@ -6,5 +6,6 @@ namespace ExamsSystem.Data.Interfaces
 {
     public interface IExamRepository
     {
+        void GetDataTest();
     }
 }

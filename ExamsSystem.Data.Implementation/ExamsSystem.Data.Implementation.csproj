@@ -6,11 +6,16 @@
 
   <ItemGroup>
     <Folder Include="Mapping\" />
-    <Folder Include="Migrations\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ExamsSystem.Data.Interfaces\ExamsSystem.Data.Interfaces.csproj" />
+    <ProjectReference Include="..\ExamsSystem.Data.Models\ExamsSystem.Data.Models.csproj" />
   </ItemGroup>
 
 </Project>

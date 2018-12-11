@@ -23,7 +23,8 @@ namespace ExamsSystem.Web.Controllers
         [HttpGet("index")]
         public IActionResult Index()
         {
-            return Ok("works");
+            _examService.GetData();
+            return Ok();
         }
     }
 }

@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ExamsSystem.BusinessLogic.Interfaces\ExamsSystem.BusinessLogic.Interfaces.csproj" />
+    <ProjectReference Include="..\ExamsSystem.Data.Implementation\ExamsSystem.Data.Implementation.csproj" />
   </ItemGroup>
 
 </Project>
