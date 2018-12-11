@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using ExamsSystem.Data.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +18,6 @@ namespace ExamsSystem.Data.Implementation
 
         public void GetDataTest()
         {
-            var items = _databaseContext.Professors.Include(p => p.Exams);
         }
     }
 }
