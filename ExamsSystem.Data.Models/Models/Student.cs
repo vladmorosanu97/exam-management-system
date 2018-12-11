@@ -9,7 +9,6 @@ namespace ExamsSystem.Data.Models.Models
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-//        public IEnumerable<Exam> Exams { get; set; }
-//        public IEnumerable<Course> Courses { get; set; }
+        public IList<StudentCourse> StudentCourses { get; set; }
     }
 }

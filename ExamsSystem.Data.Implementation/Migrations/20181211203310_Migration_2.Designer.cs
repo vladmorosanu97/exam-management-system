@@ -4,14 +4,16 @@ using ExamsSystem.Data.Implementation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ExamsSystem.Data.Implementation.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20181211203310_Migration_2")]
+    partial class Migration_2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -124,7 +126,7 @@ namespace ExamsSystem.Data.Implementation.Migrations
 
                     b.HasIndex("CourseId");
 
-                    b.ToTable("StudentCourses");
+                    b.ToTable("StudentCourse");
                 });
 
             modelBuilder.Entity("ExamsSystem.Data.Models.Models.Classroom", b =>

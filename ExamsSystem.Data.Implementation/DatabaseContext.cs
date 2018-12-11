@@ -19,17 +19,34 @@ namespace ExamsSystem.Data.Implementation
         public DbSet<Classroom> Classrooms { get; set; }
         public DbSet<Exam> Exams { get; set; }
         public DbSet<Student> Students { get; set; }
+        public DbSet<StudentCourse> StudentCourses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Professor>()
-                .HasKey(p => p.Id);
-            modelBuilder.Entity<Professor>()
-                .HasMany(e => e.Exams)
-                .WithOne(e => e.Professor);
+            modelBuilder.Entity<StudentCourse>().HasKey(sc => new { sc.StudentId, sc.CourseId });
+
+
+            modelBuilder.Entity<StudentCourse>()
+                .HasOne<Student>(sc => sc.Student)
+                .WithMany(s => s.StudentCourses)
+                .HasForeignKey(sc => sc.StudentId);
+
+
+            modelBuilder.Entity<StudentCourse>()
+                .HasOne<Course>(sc => sc.Course)
+                .WithMany(s => s.StudentCourses)
+                .HasForeignKey(sc => sc.CourseId);
 
             modelBuilder.Entity<Professor>()
-                .HasMany(a => a.Courses);
+                .HasKey(p => p.Id);
+
+            modelBuilder.Entity<Professor>()
+                .HasMany(p => p.Courses)
+                .WithOne(c => c.Professor);
+
+            modelBuilder.Entity<Course>()
+                .HasMany(c => c.Exams)
+                .WithOne(e => e.Course);
 
             modelBuilder.Entity<Exam>()
                 .HasMany(a => a.Classrooms);
