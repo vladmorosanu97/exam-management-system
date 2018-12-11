@@ -18,6 +18,7 @@ namespace ExamsSystem.Data.Implementation
 
         public void GetDataTest()
         {
+            var items = _databaseContext.Professors.Include(a => a.Courses).ThenInclude(c => c.Exams).Where(a => a.Id == 1);
         }
     }
 }
