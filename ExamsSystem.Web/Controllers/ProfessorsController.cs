@@ -51,5 +51,18 @@ namespace ExamsSystem.Web.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet("{professorId}/exams")]
+        public IActionResult GetExamsByProfessorId(int professorId)
+        {
+            try
+            {
+                return Ok(_examService.GetExamsByProfessorId(professorId));
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+        }
     }
 }

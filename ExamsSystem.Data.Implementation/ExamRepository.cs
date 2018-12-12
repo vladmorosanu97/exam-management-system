@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using ExamsSystem.Data.Interfaces;
 using ExamsSystem.Data.Models.Models;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,11 @@ namespace ExamsSystem.Data.Implementation
         public Exam GetExamById(int id)
         {
             return _databaseContext.Exams.Find(id);
+        }
+
+        public IEnumerable<Exam> GetExamsByProfessorId(int professorId)
+        {
+            return _databaseContext.Exams.Where(c => c.ProfessorId == professorId);
         }
     }
 }
