@@ -39,12 +39,12 @@ namespace ExamsSystem.Web.Controllers
             }
         }
 
-        [HttpGet("{professorId}/courses/{courseId}/exams/{examId}")]
-        public IActionResult GetById(int examId)
+        [HttpGet("{professorId}/exams/{examId}")]
+        public IActionResult GetExamById(int professorId, int examId)
         {
             try
             {
-                return Ok(_examService.GetExamById(examId));
+                return Ok(_examService.GetExamById(professorId, examId));
             }
             catch (Exception ex)
             {

@@ -22,9 +22,9 @@ namespace ExamsSystem.BusinessLogic.Implementation.Services
             _examRepository.GetDataTest();
         }
 
-        public Exam GetExamById(int id)
+        public ExamBlModel GetExamById(int professorId, int examId)
         {
-            return _examRepository.GetExamById(id);
+            return _examRepository.GetExamById(professorId, examId).GetExamBlModel();
         }
 
         public IEnumerable<ExamBlModel> GetExamsByProfessorId(int professorId)

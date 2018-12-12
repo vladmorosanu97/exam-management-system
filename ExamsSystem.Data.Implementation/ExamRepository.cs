@@ -20,14 +20,14 @@ namespace ExamsSystem.Data.Implementation
             var items = _databaseContext.Professors.Include(a => a.Courses).ThenInclude(c => c.Exams).Where(a => a.Id == 1);
         }
 
-        public Exam GetExamById(int id)
+        public Exam GetExamById(int professorId,int examId)
         {
-            return _databaseContext.Exams.Find(id);
+            return _databaseContext.Exams.Include(e => e.Course).FirstOrDefault(e => e.Id == examId && e.Course.ProfessorId == professorId);
         }
 
         public IEnumerable<Exam> GetExamsByProfessorId(int professorId)
         {
-            return _databaseContext.Exams.Where(c => c.ProfessorId == professorId);
+            return _databaseContext.Exams.Include(e => e.Course).Where(c => c.Course.ProfessorId == professorId);
         }
     }
 }

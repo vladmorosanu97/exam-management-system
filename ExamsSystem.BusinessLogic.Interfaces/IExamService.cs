@@ -7,7 +7,7 @@ namespace ExamsSystem.BusinessLogic.Interfaces
     public interface IExamService
     {
         void GetData();
-        Exam GetExamById(int id);
+        ExamBlModel GetExamById(int professorId, int id);
         IEnumerable<ExamBlModel> GetExamsByProfessorId(int professorId);
     }
 }

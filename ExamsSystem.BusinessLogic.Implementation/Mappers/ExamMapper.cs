@@ -12,12 +12,12 @@ namespace ExamsSystem.BusinessLogic.Implementation.Mappers
         {
             var blItem = new ExamBlModel
             {
-                ProfessorId = item.ProfessorId,
                 Description = item.Description,
                 Title = item.Title,
                 Date = item.Date,
                 StartHour = item.StartHour,
-                FinishHour = item.FinishHour
+                FinishHour = item.FinishHour,
+                Course =  item.Course.GetBlModel()
             };
             return blItem;
         }
