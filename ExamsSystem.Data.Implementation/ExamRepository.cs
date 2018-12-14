@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ExamsSystem.Data.Interfaces;
 using ExamsSystem.Data.Models.Models;
@@ -17,7 +18,7 @@ namespace ExamsSystem.Data.Implementation
 
         public void GetDataTest()
         {
-            var items = _databaseContext.Professors.Include(a => a.Courses).ThenInclude(c => c.Exams).Where(a => a.Id == 1);
+            var items = _databaseContext.Courses.Include(c => c.StudentCourses).ThenInclude(c => c.Student).Where(c => c.Id == 2);
         }
 
         public Exam GetExamById(int professorId,int examId)
@@ -29,5 +30,12 @@ namespace ExamsSystem.Data.Implementation
         {
             return _databaseContext.Exams.Include(e => e.Course).Where(c => c.Course.ProfessorId == professorId);
         }
+
+        public void CreateExam(Exam exam)
+        {
+            _databaseContext.Exams.Add(exam);
+            _databaseContext.SaveChanges();
+        }
+
     }
 }

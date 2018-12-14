@@ -15,7 +15,7 @@ namespace ExamsSystem.Ioc
             services.AddDbContext<DatabaseContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-            //          // Repositories
+            // Repositories
             services.AddScoped<IExamRepository, ExamRepository>();
             services.AddScoped<ICourseRepository, CourseRepository>();
 

@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Net;
+using System.Net.Http;
 using ExamsSystem.BusinessLogic.Interfaces;
+using ExamsSystem.Data.Models.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExamsSystem.Web.Controllers
@@ -39,6 +42,19 @@ namespace ExamsSystem.Web.Controllers
             }
         }
 
+        [HttpGet("{professorId}/courses/{courseId}")]
+        public IActionResult GetCoursesByProfessorIdAndCourseId(int professorId, int courseId)
+        {
+            try
+            {
+                return Ok(_courseService.GetCourseByProfessorIdAndCourseId(professorId, courseId));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpGet("{professorId}/exams/{examId}")]
         public IActionResult GetExamById(int professorId, int examId)
         {
@@ -63,6 +79,26 @@ namespace ExamsSystem.Web.Controllers
             {
                 return BadRequest(exception.Message);
             }
+        }
+
+        [HttpPost("{professorId}/courses/{courseId}/exams")]
+        public HttpResponseMessage EditExam(int professorId, int courseId, [FromBody]Exam exam)
+        {
+            
+            /*
+            var checkIfExists = _courseService.GetCourseById(professorId, courseId);//verficam daca profesorul preda cursul ala
+             
+            if (idExam == null)
+            {
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);
+            }
+            else
+            {
+                _examService.CreateExam(exam);
+            }
+            return new HttpResponseMessage(HttpStatusCode.OK);*/
+            _examService.CreateExam(exam);
+            return new HttpResponseMessage(HttpStatusCode.OK);
         }
     }
 }
