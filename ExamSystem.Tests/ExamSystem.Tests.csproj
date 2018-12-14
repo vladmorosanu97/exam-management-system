@@ -7,11 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="..\ExamsSystem.Web\appsettings.Development.json" Link="Repositories\appsettings.Development.json" />
-    <Content Include="..\ExamsSystem.Web\appsettings.json" Link="Repositories\appsettings.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="5.5.3" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
