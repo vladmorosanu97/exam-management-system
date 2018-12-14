@@ -17,5 +17,10 @@ namespace ExamsSystem.Data.Implementation
         {
             return _databaseContext.Courses.Where(c => c.ProfessorId == professorId);
         }
+
+        public Course GetCourseByProfessorIdAndCourseId(int professorId, int courseId)
+        {
+            return _databaseContext.Courses.FirstOrDefault(c => c.ProfessorId == professorId && c.Id == courseId);
+        }
     }
 }

@@ -20,5 +20,10 @@ namespace ExamsSystem.BusinessLogic.Implementation.Services
         {
             return _courseRepository.GetCoursesByProfessorId(professorId).Select(c => c.GetBlModel());
         }
+
+        public CourseBlModel GetCourseByProfessorIdAndCourseId(int professorId, int courseId)
+        {
+            return _courseRepository.GetCourseByProfessorIdAndCourseId(professorId, courseId).GetBlModel();
+        }
     }
 }

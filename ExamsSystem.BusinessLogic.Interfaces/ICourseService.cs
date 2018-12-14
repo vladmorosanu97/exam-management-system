@@ -6,5 +6,6 @@ namespace ExamsSystem.BusinessLogic.Interfaces
     public interface ICourseService
     {
         IEnumerable<CourseBlModel> GetCoursesByProfessorId(int professorId);
+        CourseBlModel GetCourseByProfessorIdAndCourseId(int professorId, int courseId);
     }
 }

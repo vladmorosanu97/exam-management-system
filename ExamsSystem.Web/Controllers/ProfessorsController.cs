@@ -39,6 +39,19 @@ namespace ExamsSystem.Web.Controllers
             }
         }
 
+        [HttpGet("{professorId}/courses/{courseId}")]
+        public IActionResult GetCoursesByProfessorIdAndCourseId(int professorId, int courseId)
+        {
+            try
+            {
+                return Ok(_courseService.GetCourseByProfessorIdAndCourseId(professorId, courseId));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpGet("{professorId}/exams/{examId}")]
         public IActionResult GetExamById(int professorId, int examId)
         {

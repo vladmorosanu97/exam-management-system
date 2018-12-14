@@ -3,25 +3,27 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2050
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamsSystem.Web", "ExamsSystem.Web\ExamsSystem.Web.csproj", "{2FF0F205-85BF-4EB6-8A1B-3453F64B1D83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExamsSystem.Web", "ExamsSystem.Web\ExamsSystem.Web.csproj", "{2FF0F205-85BF-4EB6-8A1B-3453F64B1D83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamsSystem.Data.Models", "ExamsSystem.Data.Models\ExamsSystem.Data.Models.csproj", "{9834DEED-6D1A-4F5F-BCFB-7B682292BE63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExamsSystem.Data.Models", "ExamsSystem.Data.Models\ExamsSystem.Data.Models.csproj", "{9834DEED-6D1A-4F5F-BCFB-7B682292BE63}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamsSystem.Data.Interfaces", "ExamsSystem.Data.Interfaces\ExamsSystem.Data.Interfaces.csproj", "{DF36B48C-0F32-4B15-A753-63487E2496FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExamsSystem.Data.Interfaces", "ExamsSystem.Data.Interfaces\ExamsSystem.Data.Interfaces.csproj", "{DF36B48C-0F32-4B15-A753-63487E2496FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamsSystem.Data.Implementation", "ExamsSystem.Data.Implementation\ExamsSystem.Data.Implementation.csproj", "{E8C90D6C-425A-47B4-BCC4-97C2AA7D5BE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExamsSystem.Data.Implementation", "ExamsSystem.Data.Implementation\ExamsSystem.Data.Implementation.csproj", "{E8C90D6C-425A-47B4-BCC4-97C2AA7D5BE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamsSystem.BusinessLogic.Models", "ExamsSystem.BusinessLogic.Models\ExamsSystem.BusinessLogic.Models.csproj", "{EB3422A9-9E91-49FC-B1F4-881B8DA8694D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExamsSystem.BusinessLogic.Models", "ExamsSystem.BusinessLogic.Models\ExamsSystem.BusinessLogic.Models.csproj", "{EB3422A9-9E91-49FC-B1F4-881B8DA8694D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamsSystem.BusinessLogic.Interfaces", "ExamsSystem.BusinessLogic.Interfaces\ExamsSystem.BusinessLogic.Interfaces.csproj", "{CDE1197A-B955-4316-AF76-50C727223EB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExamsSystem.BusinessLogic.Interfaces", "ExamsSystem.BusinessLogic.Interfaces\ExamsSystem.BusinessLogic.Interfaces.csproj", "{CDE1197A-B955-4316-AF76-50C727223EB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamsSystem.BusinessLogic.Implementation", "ExamsSystem.BusinessLogic.Implementation\ExamsSystem.BusinessLogic.Implementation.csproj", "{67EE311A-F69A-49B6-882F-6C83F0A314A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExamsSystem.BusinessLogic.Implementation", "ExamsSystem.BusinessLogic.Implementation\ExamsSystem.BusinessLogic.Implementation.csproj", "{67EE311A-F69A-49B6-882F-6C83F0A314A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamsSystem.Data.Identity", "ExamsSystem.Data.Identity\ExamsSystem.Data.Identity.csproj", "{1401F494-C103-409C-A414-766031A886A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExamsSystem.Data.Identity", "ExamsSystem.Data.Identity\ExamsSystem.Data.Identity.csproj", "{1401F494-C103-409C-A414-766031A886A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamsSystem.Utils", "ExamsSystem.Utils\ExamsSystem.Utils.csproj", "{C0A74869-AB85-4389-8B41-FCC8D7AD334A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExamsSystem.Utils", "ExamsSystem.Utils\ExamsSystem.Utils.csproj", "{C0A74869-AB85-4389-8B41-FCC8D7AD334A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamsSystem.Ioc", "ExamsSystem.Ioc\ExamsSystem.Ioc.csproj", "{DC21030B-15AC-4FA7-8EC2-93573DAEB0A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExamsSystem.Ioc", "ExamsSystem.Ioc\ExamsSystem.Ioc.csproj", "{DC21030B-15AC-4FA7-8EC2-93573DAEB0A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamSystem.Tests", "ExamSystem.Tests\ExamSystem.Tests.csproj", "{281A4A74-07FE-4E24-92BA-9BE0BF2042B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,10 @@ Global
 		{DC21030B-15AC-4FA7-8EC2-93573DAEB0A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC21030B-15AC-4FA7-8EC2-93573DAEB0A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC21030B-15AC-4FA7-8EC2-93573DAEB0A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{281A4A74-07FE-4E24-92BA-9BE0BF2042B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{281A4A74-07FE-4E24-92BA-9BE0BF2042B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{281A4A74-07FE-4E24-92BA-9BE0BF2042B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{281A4A74-07FE-4E24-92BA-9BE0BF2042B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
