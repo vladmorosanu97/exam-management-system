@@ -14,7 +14,7 @@ namespace ExamsSystem.BusinessLogic.Implementation.Mappers
             {
                 ProfessorId = item.ProfessorId,
                 Description = item.Description,
-                Title = item.Description
+                Title = item.Title
             };
             return blItem;
         }
