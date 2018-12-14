@@ -8,5 +8,6 @@ namespace ExamsSystem.Data.Interfaces
         void GetDataTest();
         Exam GetExamById(int professorId, int examId);
         IEnumerable<Exam> GetExamsByProfessorId(int professorId);
+        void CreateExam(Exam exam);
     }
 }
