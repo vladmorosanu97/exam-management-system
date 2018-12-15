@@ -82,7 +82,7 @@ namespace ExamsSystem.Web.Controllers
         }
 
         [HttpPost("{professorId}/courses/{courseId}/exams")]
-        public HttpResponseMessage EditExam(int professorId, int courseId, [FromBody]Exam exam)
+        public HttpResponseMessage CreateExam(int professorId, int courseId, [FromBody]Exam exam)
         {
             
             /*
@@ -98,6 +98,22 @@ namespace ExamsSystem.Web.Controllers
             }
             return new HttpResponseMessage(HttpStatusCode.OK);*/
             _examService.CreateExam(exam);
+            return new HttpResponseMessage(HttpStatusCode.OK);
+        }
+
+        [HttpPost("{professorId}/courses/{courseId}/exams/{examId}")]
+        public HttpResponseMessage EditExam(int professorId, int courseId, int examId, [FromBody]Exam exam)
+        {
+            var dbExam = _examService.GetExamById(professorId, examId);
+
+            if (dbExam == null)
+            {
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);
+            }
+            else
+            {
+                _examService.EditExam(professorId, courseId, examId, exam);
+            }
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
     }
