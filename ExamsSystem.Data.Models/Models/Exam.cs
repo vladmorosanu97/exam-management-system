@@ -13,5 +13,6 @@ namespace ExamsSystem.Data.Models.Models
         public int CourseId { get; set; }
         public Course Course { get; set; }
         public ICollection<Classroom> Classrooms { get; set; }
+        public int ProfessorId { get; set; }
     }
 }
