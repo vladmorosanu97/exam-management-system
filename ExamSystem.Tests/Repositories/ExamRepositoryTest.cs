@@ -137,7 +137,7 @@ namespace ExamSystem.Tests
         public void CleanUp()
         {
             _databaseContext.Exams.Remove(exam);
-           
+            _databaseContext.Professors.Remove(professor);
             _databaseContext.SaveChanges();
         }
     }
