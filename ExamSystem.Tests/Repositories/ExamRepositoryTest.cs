@@ -60,6 +60,7 @@ namespace ExamSystem.Tests
 
             };
         }
+
         [TestMethod]
         public void GivenExamId_WhenCallGetExamsByProfessorId()
         {
@@ -70,14 +71,68 @@ namespace ExamSystem.Tests
             var items = _examRepository.GetExamsByProfessorId(professorId);
 
             //assert
-
             foreach (var exam in items)
             {
                 exam.ProfessorId.Should().Be(professorId);
             }
-
         }
-        
+
+        [TestMethod]
+        public void GivenExamId_WhenCallingGetExamByIdWithValidProfessorIdAndValidExamId_ThenShouldReturnTheCorrectExam()
+        {
+            // arrange
+            var professorId = professor.Id;
+            var examId = exam.Id;
+
+            // act
+            var actualResult = _examRepository.GetExamById(professorId, examId);
+
+            // assert
+            Assert.AreEqual(actualResult, exam);
+        }
+
+        [TestMethod]
+        public void GivenExamId_WhenCallingGetExamByIdWithInvalidProfessorIdAndValidExamId_ThenShouldReturnNull()
+        {
+            // arrange
+            var professorId = -1;
+            var examId = exam.Id;
+
+            // act
+            var actualResult = _examRepository.GetExamById(professorId, examId);
+
+            // assert
+            Assert.IsNull(actualResult);
+        }
+
+        [TestMethod]
+        public void GivenExamId_WhenCallingGetExamByIdWithValidProfessorIdAndInvalidExamId_ThenShouldReturnNull()
+        {
+            // arrange
+            var professorId = professor.Id;
+            var examId = -1;
+
+            // act
+            var actualResult = _examRepository.GetExamById(professorId, examId);
+
+            // assert
+            Assert.IsNull(actualResult);
+        }
+
+        [TestMethod]
+        public void GivenExamId_WhenCallingGetExamByIdWithInvalidProfessorIdAndInvalidExamId_ThenShouldReturnNull()
+        {
+            // arrange
+            var professorId = -1;
+            var examId = -1;
+
+            // act
+            var actualResult = _examRepository.GetExamById(professorId, examId);
+
+            // assert
+            Assert.IsNull(actualResult);
+        }
+
         [TestCleanup]
         public void CleanUp()
         {
