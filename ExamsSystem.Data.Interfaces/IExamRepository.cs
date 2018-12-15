@@ -9,5 +9,6 @@ namespace ExamsSystem.Data.Interfaces
         Exam GetExamById(int professorId, int examId);
         IEnumerable<Exam> GetExamsByProfessorId(int professorId);
         void CreateExam(Exam exam);
+        void EditExam(Exam exam);
     }
 }

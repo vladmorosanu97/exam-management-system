@@ -6,6 +6,7 @@ namespace ExamsSystem.BusinessLogic.Models
 {
     public class StudentCourseBlModel
     {
+        public int Id { get; set; }
         public int StudentId { get; set; }
         public StudentBlModel Student { get; set; }
 

@@ -32,10 +32,14 @@ namespace ExamSystem.Tests
             _databaseContext.Professors.Add(professor);
             _databaseContext.SaveChanges();
 
-            var id = professor.Id;
+            course = InitCourse();
+            course.ProfessorId = professor.Id;
+
+            _databaseContext.Courses.Add(course);
+            _databaseContext.SaveChanges();
 
             exam = InitExam();
-            exam.ProfessorId = professor.Id;
+            exam.CourseId = course.Id;
 
             _databaseContext.Exams.Add(exam);
             _databaseContext.SaveChanges();
@@ -56,13 +60,23 @@ namespace ExamSystem.Tests
             return new Exam()
             {
                 Description = "ceva greu",
-                Title = "PLP",
+                Title = "Partial",
+
+            };
+        }
+
+        public Course InitCourse()
+        {
+            return new Course()
+            {
+                Description = "ceva greu",
+                Title = "ML",
 
             };
         }
 
         [TestMethod]
-        public void GivenExamId_WhenCallGetExamsByProfessorId()
+        public void GivenExamId_WhenCallGetExamsByProfessorId_ShouldReturnCorrectExamsForCoursesThatHaveProfessorId()
         {
             //arrange
             var professorId = professor.Id;
@@ -73,7 +87,7 @@ namespace ExamSystem.Tests
             //assert
             foreach (var exam in items)
             {
-                exam.ProfessorId.Should().Be(professorId);
+                exam.Course.ProfessorId.Should().Be(professorId);
             }
         }
 
@@ -88,7 +102,8 @@ namespace ExamSystem.Tests
             var actualResult = _examRepository.GetExamById(professorId, examId);
 
             // assert
-            Assert.AreEqual(actualResult, exam);
+            actualResult.Id.Should().Be(examId);
+            actualResult.Course.ProfessorId.Should().Be(professorId);
         }
 
         [TestMethod]
@@ -102,7 +117,7 @@ namespace ExamSystem.Tests
             var actualResult = _examRepository.GetExamById(professorId, examId);
 
             // assert
-            Assert.IsNull(actualResult);
+            actualResult.Should().BeNull();
         }
 
         [TestMethod]
@@ -116,7 +131,7 @@ namespace ExamSystem.Tests
             var actualResult = _examRepository.GetExamById(professorId, examId);
 
             // assert
-            Assert.IsNull(actualResult);
+            actualResult.Should().BeNull();
         }
 
         [TestMethod]
@@ -130,13 +145,14 @@ namespace ExamSystem.Tests
             var actualResult = _examRepository.GetExamById(professorId, examId);
 
             // assert
-            Assert.IsNull(actualResult);
+            actualResult.Should().BeNull();
         }
 
         [TestCleanup]
         public void CleanUp()
         {
             _databaseContext.Exams.Remove(exam);
+            _databaseContext.Courses.Remove(course);
             _databaseContext.Professors.Remove(professor);
             _databaseContext.SaveChanges();
         }

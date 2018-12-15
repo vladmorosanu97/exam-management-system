@@ -6,6 +6,7 @@ namespace ExamsSystem.BusinessLogic.Models
 {
     public class ProfessorBlMode
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }

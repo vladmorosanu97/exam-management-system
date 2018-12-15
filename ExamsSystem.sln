@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExamsSystem.Utils", "ExamsS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExamsSystem.Ioc", "ExamsSystem.Ioc\ExamsSystem.Ioc.csproj", "{DC21030B-15AC-4FA7-8EC2-93573DAEB0A1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExamSystem.Tests", "ExamSystem.Tests\ExamSystem.Tests.csproj", "{D4A59406-B26D-4151-850D-01B2AB0A5FCE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamSystem.Tests", "ExamSystem.Tests\ExamSystem.Tests.csproj", "{281A4A74-07FE-4E24-92BA-9BE0BF2042B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,10 +71,10 @@ Global
 		{DC21030B-15AC-4FA7-8EC2-93573DAEB0A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC21030B-15AC-4FA7-8EC2-93573DAEB0A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC21030B-15AC-4FA7-8EC2-93573DAEB0A1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D4A59406-B26D-4151-850D-01B2AB0A5FCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D4A59406-B26D-4151-850D-01B2AB0A5FCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D4A59406-B26D-4151-850D-01B2AB0A5FCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D4A59406-B26D-4151-850D-01B2AB0A5FCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{281A4A74-07FE-4E24-92BA-9BE0BF2042B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{281A4A74-07FE-4E24-92BA-9BE0BF2042B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{281A4A74-07FE-4E24-92BA-9BE0BF2042B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{281A4A74-07FE-4E24-92BA-9BE0BF2042B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

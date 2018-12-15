@@ -37,5 +37,13 @@ namespace ExamsSystem.Data.Implementation
             _databaseContext.SaveChanges();
         }
 
+        public void EditExam(Exam exam)
+        {
+            var item = _databaseContext.Exams.FirstOrDefault(e => e.Id == exam.Id);
+            item.Title = exam.Title;
+
+            _databaseContext.Exams.Update(item);
+            _databaseContext.SaveChanges();
+        }
     }
 }

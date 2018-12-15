@@ -17,7 +17,23 @@ namespace ExamsSystem.BusinessLogic.Implementation.Mappers
                 Date = item.Date,
                 StartHour = item.StartHour,
                 FinishHour = item.FinishHour,
-                Course =  item.Course.GetBlModel()
+                Course =  item.Course?.GetBlModel(),
+                Id = item.Id
+            };
+            return blItem;
+        }
+
+        public static Exam GetDataModel(this ExamBlModel item)
+        {
+            var blItem = new Exam
+            {
+                Description = item.Description,
+                Title = item.Title,
+                Date = item.Date,
+                StartHour = item.StartHour,
+                FinishHour = item.FinishHour,
+                Course = item.Course?.GetDataModel(),
+                Id = item.Id
             };
             return blItem;
         }

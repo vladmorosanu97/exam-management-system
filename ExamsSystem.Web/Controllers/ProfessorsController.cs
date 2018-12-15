@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Http;
 using ExamsSystem.BusinessLogic.Interfaces;
+using ExamsSystem.BusinessLogic.Models;
 using ExamsSystem.Data.Models.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -81,40 +82,47 @@ namespace ExamsSystem.Web.Controllers
             }
         }
 
-        [HttpPost("{professorId}/courses/{courseId}/exams")]
-        public HttpResponseMessage CreateExam(int professorId, int courseId, [FromBody]Exam exam)
+        [HttpPost("{professorId}/exams")]
+        public IActionResult CreateExam([FromBody]ExamBlModel exam)
         {
-            
-            /*
-            var checkIfExists = _courseService.GetCourseById(professorId, courseId);//verficam daca profesorul preda cursul ala
-             
-            if (idExam == null)
-            {
-                return new HttpResponseMessage(HttpStatusCode.BadRequest);
-            }
-            else
+//            if (exam.Course == null)
+//            {
+//                return BadRequest("Invalid exam");
+//            }
+
+            try
             {
                 _examService.CreateExam(exam);
+                return Ok("Created exam");
             }
-            return new HttpResponseMessage(HttpStatusCode.OK);*/
-            _examService.CreateExam(exam);
-            return new HttpResponseMessage(HttpStatusCode.OK);
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
+
         }
 
-        [HttpPost("{professorId}/courses/{courseId}/exams/{examId}")]
-        public HttpResponseMessage EditExam(int professorId, int courseId, int examId, [FromBody]Exam exam)
+        [HttpPut("{professorId}/exams")]
+        public IActionResult EditExam([FromBody] ExamBlModel examBlModel)
         {
-            var dbExam = _examService.GetExamById(professorId, examId);
+            var exam = _examService.GetExamById(examBlModel.Course.ProfessorId, examBlModel.CourseId);
 
-            if (dbExam == null)
+            if (exam == null)
             {
-                return new HttpResponseMessage(HttpStatusCode.BadRequest);
+                return BadRequest("Invalid exam");
             }
-            else
+
+            try
             {
-                _examService.EditExam(professorId, courseId, examId, exam);
+                _examService.EditExam(examBlModel);
+                return Ok("Exam updated");
             }
-            return new HttpResponseMessage(HttpStatusCode.OK);
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
     }
 }

@@ -14,9 +14,23 @@ namespace ExamsSystem.BusinessLogic.Implementation.Mappers
             {
                 ProfessorId = item.ProfessorId,
                 Description = item.Description,
-                Title = item.Title
+                Title = item.Title,
+                Id = item.Id
+                
             };
             return blItem;
+        }
+
+        public static Course GetDataModel(this CourseBlModel blItem)
+        {
+            var item = new Course
+            {
+                ProfessorId = blItem.ProfessorId,
+                Description = blItem.Description,
+                Title = blItem.Title,
+                Id = blItem.Id
+            };
+            return item;
         }
     }
 }

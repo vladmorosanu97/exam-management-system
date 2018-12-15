@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using ExamsSystem.Data.Implementation;
 using ExamsSystem.Data.Interfaces;
 using ExamsSystem.Data.Models.Models;
@@ -17,6 +18,7 @@ namespace ExamSystem.Tests
         private DbContextOptions<DatabaseContext> _options;
         public Course course { get; set; }
         public Professor professor { get; set; }
+
         [TestInitialize]
         public void InitTests()
         {
@@ -74,6 +76,19 @@ namespace ExamSystem.Tests
         }
 
         [TestMethod]
+        public void GivenInvalidProfessorId_WhenCallGetCoursesByProfessorId_ThenShouldNull()
+        {
+            //arrange
+            var professorId = -1;
+
+            //act
+            var items = _courseRepository.GetCoursesByProfessorId(professorId);
+
+            //assert
+            items.Count().Should().Be(0);
+        }
+
+        [TestMethod]
         public void GivenProfessorIdAndCourseId_WhenCallGetCoursesByProfessorIdAndCourseId_ThenShouldReturnTheCorrectCourse()
         {
             //arrange
@@ -86,6 +101,48 @@ namespace ExamSystem.Tests
             //assert
             expectedCourse.ProfessorId.Should().Be(professorId);
             expectedCourse.Id.Should().Be(courseId);
+        }
+
+        [TestMethod]
+        public void GivenInvalidProfessorIdAndCourseId_WhenCallGetCoursesByProfessorIdAndCourseId_ThenShouldReturnNull()
+        {
+            //arrange
+            var professorId = -1;
+            var courseId = course.Id;
+
+            //act
+            var expectedCourse = _courseRepository.GetCourseByProfessorIdAndCourseId(professorId, courseId);
+
+            //assert
+            expectedCourse.Should().BeNull();
+        }
+
+        [TestMethod]
+        public void GivenProfessorIdAndInvalidCourseId_WhenCallGetCoursesByProfessorIdAndCourseId_ThenShouldReturnNull()
+        {
+            //arrange
+            var professorId = professor.Id;
+            var courseId = -1;
+
+            //act
+            var expectedCourse = _courseRepository.GetCourseByProfessorIdAndCourseId(professorId, courseId);
+
+            //assert
+            expectedCourse.Should().BeNull();
+        }
+
+        [TestMethod]
+        public void GivenInvalidProfessorIdAndInvalidCourseId_WhenCallGetCoursesByProfessorIdAndCourseId_ThenShouldReturnNull()
+        {
+            //arrange
+            var professorId = -1;
+            var courseId = -1;
+
+            //act
+            var expectedCourse = _courseRepository.GetCourseByProfessorIdAndCourseId(professorId, courseId);
+
+            //assert
+            expectedCourse.Should().BeNull();
         }
 
         [TestCleanup]

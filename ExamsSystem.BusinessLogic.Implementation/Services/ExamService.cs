@@ -32,10 +32,14 @@ namespace ExamsSystem.BusinessLogic.Implementation.Services
             return _examRepository.GetExamsByProfessorId(professorId).Select(c => c.GetExamBlModel());
         }
 
-        public void CreateExam(Exam exam)
+        public void CreateExam(ExamBlModel exam)
         {
-            _examRepository.CreateExam(exam);
+            _examRepository.CreateExam(exam.GetDataModel());
         }
 
+        public void EditExam(ExamBlModel exam)
+        {
+            _examRepository.EditExam(exam.GetDataModel());
+        }
     }
 }
