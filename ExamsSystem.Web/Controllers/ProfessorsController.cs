@@ -30,7 +30,7 @@ namespace ExamsSystem.Web.Controllers
             return Ok();
         }
 
-        [HttpGet("{professorId}/courses")]
+        [HttpGet("{professorId:int}/courses")]
         public IActionResult GetCoursesByProfessorId(int professorId)
         {
             try
@@ -43,7 +43,7 @@ namespace ExamsSystem.Web.Controllers
             }
         }
 
-        [HttpGet("{professorId}/courses/{courseId}")]
+        [HttpGet("{professorId:int}/courses/{courseId:int}")]
         public IActionResult GetCoursesByProfessorIdAndCourseId(int professorId, int courseId)
         {
             try
@@ -56,7 +56,7 @@ namespace ExamsSystem.Web.Controllers
             }
         }
 
-        [HttpGet("{professorId}/exams/{examId}")]
+        [HttpGet("{professorId:int}/exams/{examId:int}")]
         public IActionResult GetExamById(int professorId, int examId)
         {
             try
@@ -69,7 +69,7 @@ namespace ExamsSystem.Web.Controllers
             }
         }
 
-        [HttpGet("{professorId}/exams")]
+        [HttpGet("{professorId:int}/exams")]
         public IActionResult GetExamsByProfessorId(int professorId)
         {
             try
@@ -82,14 +82,9 @@ namespace ExamsSystem.Web.Controllers
             }
         }
 
-        [HttpPost("{professorId}/exams")]
+        [HttpPost("{professorId:int}/exams")]
         public IActionResult CreateExam([FromBody]ExamBlModel exam)
         {
-//            if (exam.Course == null)
-//            {
-//                return BadRequest("Invalid exam");
-//            }
-
             try
             {
                 _examService.CreateExam(exam);
@@ -99,11 +94,9 @@ namespace ExamsSystem.Web.Controllers
             {
                 return BadRequest(ex.Message);
             }
-            
-
         }
 
-        [HttpPut("{professorId}/exams")]
+        [HttpPut("{professorId:int}/exams")]
         public IActionResult EditExam([FromBody] ExamBlModel examBlModel)
         {
             var exam = _examService.GetExamById(examBlModel.Course.ProfessorId, examBlModel.CourseId);
@@ -116,7 +109,7 @@ namespace ExamsSystem.Web.Controllers
             try
             {
                 _examService.EditExam(examBlModel);
-                return Ok("Exam updated");
+                return NoContent();
             }
             catch (Exception ex)
             {
