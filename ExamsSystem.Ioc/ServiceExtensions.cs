@@ -18,10 +18,13 @@ namespace ExamsSystem.Ioc
             // Repositories
             services.AddScoped<IExamRepository, ExamRepository>();
             services.AddScoped<ICourseRepository, CourseRepository>();
+            services.AddScoped<IClassroomRepository, ClassroomRepository>();
+
 
             // Services
             services.AddScoped<IExamService, ExamService>();
-            services.AddScoped<ICourseService, CourseService>();
+            services.AddScoped<IExamService, ExamService>();
+            services.AddScoped<IClassroomService, ClassroomService>();
             return services;
         }
     }

@@ -6,12 +6,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ExamsSystem.Data.Implementation
 {
-    public sealed class DatabaseContext: DbContext
+    public sealed class DatabaseContext : DbContext
     {
         public DatabaseContext(DbContextOptions<DatabaseContext> options)
         : base(options)
         {
-           
+
         }
 
         public DbSet<Professor> Professors { get; set; }
@@ -20,7 +20,7 @@ namespace ExamsSystem.Data.Implementation
         public DbSet<Exam> Exams { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<StudentCourse> StudentCourses { get; set; }
-
+        public DbSet<ProfessorCourse> ProfessorCourses { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<StudentCourse>().HasKey(sc => new { sc.StudentId, sc.CourseId });
@@ -37,12 +37,20 @@ namespace ExamsSystem.Data.Implementation
                 .WithMany(s => s.StudentCourses)
                 .HasForeignKey(sc => sc.CourseId);
 
-            modelBuilder.Entity<Professor>()
-                .HasKey(p => p.Id);
+            modelBuilder.Entity<ProfessorCourse>()
+                .HasOne<Professor>(pc => pc.Professor)
+                .WithMany(p => p.ProfessorCourses)
+                .HasForeignKey(sc => sc.ProfessorId);
+
+
+            modelBuilder.Entity<ProfessorCourse>()
+                .HasOne<Course>(pc => pc.Course)
+                .WithMany(c => c.ProfessorCourses)
+                .HasForeignKey(sc => sc.CourseId);
+
 
             modelBuilder.Entity<Professor>()
-                .HasMany(p => p.Courses)
-                .WithOne(c => c.Professor);
+                .HasKey(p => p.Id);
 
             modelBuilder.Entity<Course>()
                 .HasMany(c => c.Exams)

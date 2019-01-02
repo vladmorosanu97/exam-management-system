@@ -9,6 +9,6 @@ namespace ExamsSystem.Data.Models.Models
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public ICollection<Course> Courses { get; set; }
+        public IList<ProfessorCourse> ProfessorCourses { get; set; }
     }
 }

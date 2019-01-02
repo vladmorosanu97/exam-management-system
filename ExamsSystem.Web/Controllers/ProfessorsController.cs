@@ -4,6 +4,7 @@ using System.Net.Http;
 using ExamsSystem.BusinessLogic.Interfaces;
 using ExamsSystem.BusinessLogic.Models;
 using ExamsSystem.Data.Models.Models;
+using ExamsSystem.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExamsSystem.Web.Controllers
@@ -83,23 +84,25 @@ namespace ExamsSystem.Web.Controllers
         }
 
         [HttpPost("{professorId:int}/exams")]
-        public IActionResult CreateExam([FromBody]ExamBlModel exam)
+        public IActionResult CreateExam([FromBody] ExamViewModel exam)
         {
-            try
-            {
-                _examService.CreateExam(exam);
-                return Ok("Created exam");
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+//            var classrooms =
+//            try
+//            {
+//                _examService.CreateExam(exam);
+//                return Ok("Created exam");
+//            }
+//            catch (Exception ex)
+//            {
+//                return BadRequest(ex.Message);
+//            }
+            return Ok();
         }
 
         [HttpPut("{professorId:int}/exams")]
         public IActionResult EditExam([FromBody] ExamBlModel examBlModel)
         {
-            var exam = _examService.GetExamById(examBlModel.Course.ProfessorId, examBlModel.CourseId);
+            var exam = _examService.GetExamById(examBlModel.ProfessorId, examBlModel.CourseId);
 
             if (exam == null)
             {

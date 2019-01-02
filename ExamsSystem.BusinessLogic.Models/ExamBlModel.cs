@@ -14,6 +14,9 @@ namespace ExamsSystem.BusinessLogic.Models
         public DateTime? FinishHour { get; set; }
         public int CourseId { get; set; }
         public CourseBlModel Course { get; set; }
+
+        public int ProfessorId { get; set; }
+        public ProfessorBlMode Professor { get; set; }
         public ICollection<ClassroomBlModel> Classrooms { get; set; }
     }
 }

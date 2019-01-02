@@ -12,7 +12,6 @@ namespace ExamsSystem.BusinessLogic.Implementation.Mappers
         {
             var blItem = new CourseBlModel
             {
-                ProfessorId = item.ProfessorId,
                 Description = item.Description,
                 Title = item.Title,
                 Id = item.Id
@@ -25,7 +24,6 @@ namespace ExamsSystem.BusinessLogic.Implementation.Mappers
         {
             var item = new Course
             {
-                ProfessorId = blItem.ProfessorId,
                 Description = blItem.Description,
                 Title = blItem.Title,
                 Id = blItem.Id

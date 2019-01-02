@@ -21,14 +21,14 @@ namespace ExamsSystem.Data.Implementation
             var items = _databaseContext.Courses.Include(c => c.StudentCourses).ThenInclude(c => c.Student).Where(c => c.Id == 2);
         }
 
-        public Exam GetExamById(int professorId,int examId)
+        public Exam GetExamById(int professorId, int examId)
         {
-            return _databaseContext.Exams.Include(e => e.Course).FirstOrDefault(e => e.Id == examId && e.Course.ProfessorId == professorId);
+            return _databaseContext.Exams.Include(e => e.Course).FirstOrDefault(e => e.Id == examId && e.ProfessorId == professorId);
         }
 
         public IEnumerable<Exam> GetExamsByProfessorId(int professorId)
         {
-            return _databaseContext.Exams.Include(e => e.Course).Where(c => c.Course.ProfessorId == professorId);
+            return _databaseContext.Exams.Include(e => e.Course).Where(c => c.ProfessorId == professorId);
         }
 
         public void CreateExam(Exam exam)
@@ -39,11 +39,11 @@ namespace ExamsSystem.Data.Implementation
 
         public void EditExam(Exam exam)
         {
-            var item = _databaseContext.Exams.FirstOrDefault(e => e.Id == exam.Id);
-            item.Title = exam.Title;
-
-            _databaseContext.Exams.Update(item);
-            _databaseContext.SaveChanges();
+//            var item = _databaseContext.Exams.FirstOrDefault(e => e.Id == exam.Id);
+//            item.Title = exam.Title;
+//
+//            _databaseContext.Exams.Update(item);
+//            _databaseContext.SaveChanges();
         }
     }
 }

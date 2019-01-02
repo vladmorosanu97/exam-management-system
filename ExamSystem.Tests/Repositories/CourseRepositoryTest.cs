@@ -28,16 +28,22 @@ namespace ExamSystem.Tests
             _courseRepository = new CourseRepository(_databaseContext);
 
             professor = InitProfessor();
-;
+            ;
             _databaseContext.Professors.Add(professor);
             _databaseContext.SaveChanges();
 
             var id = professor.Id;
 
             course = InitCourse();
-            course.ProfessorId = professor.Id;
 
+            var professorCourse = new ProfessorCourse
+            {
+                ProfessorId = professor.Id, CourseId = course.Id
+            };
+
+          
             _databaseContext.Courses.Add(course);
+            _databaseContext.ProfessorCourses.Add(professorCourse);
             _databaseContext.SaveChanges();
         }
 
@@ -59,6 +65,8 @@ namespace ExamSystem.Tests
                 Title = "PLP",
             };
         }
+
+
         [TestMethod]
         public void GivenProfessorId_WhenCallGetCoursesByProfessorId_ThenShouldReturnAllCoursesThatHaveProfessorId()
         {
@@ -71,7 +79,7 @@ namespace ExamSystem.Tests
             //assert
             foreach (var course in items)
             {
-                course.ProfessorId.Should().Be(professorId);
+                course.ProfessorCourses.Select(e => e.ProfessorId).FirstOrDefault().Should().Be(professorId);
             }
         }
 
@@ -99,7 +107,7 @@ namespace ExamSystem.Tests
             var expectedCourse = _courseRepository.GetCourseByProfessorIdAndCourseId(professorId, courseId);
 
             //assert
-            expectedCourse.ProfessorId.Should().Be(professorId);
+            expectedCourse.ProfessorCourses.FirstOrDefault(e => e.ProfessorId == professorId).Should().Be(professorId);
             expectedCourse.Id.Should().Be(courseId);
         }
 

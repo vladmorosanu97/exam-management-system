@@ -33,9 +33,15 @@ namespace ExamSystem.Tests
             _databaseContext.SaveChanges();
 
             course = InitCourse();
-            course.ProfessorId = professor.Id;
+
+            var professorCourse = new ProfessorCourse()
+            {
+                CourseId = course.Id,
+                ProfessorId = professor.Id
+            };
 
             _databaseContext.Courses.Add(course);
+            _databaseContext.ProfessorCourses.Add(professorCourse);
             _databaseContext.SaveChanges();
 
             exam = InitExam();
@@ -87,7 +93,7 @@ namespace ExamSystem.Tests
             //assert
             foreach (var exam in items)
             {
-                exam.Course.ProfessorId.Should().Be(professorId);
+                exam.ProfessorId.Should().Be(professorId);
             }
         }
 
@@ -103,7 +109,7 @@ namespace ExamSystem.Tests
 
             // assert
             actualResult.Id.Should().Be(examId);
-            actualResult.Course.ProfessorId.Should().Be(professorId);
+            actualResult.ProfessorId.Should().Be(professorId);
         }
 
         [TestMethod]

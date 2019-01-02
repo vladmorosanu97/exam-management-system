@@ -9,9 +9,7 @@ namespace ExamsSystem.BusinessLogic.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-
-        public int ProfessorId { get; set; }
-        public ProfessorBlMode Professor { get; set; }
+        public IList<ProfessorCourseBlModel> ProfessorCourses { get; set; }
         public IList<StudentCourseBlModel> StudentCourses { get; set; }
         public ICollection<ExamBlModel> Exams { get; set; }
     }

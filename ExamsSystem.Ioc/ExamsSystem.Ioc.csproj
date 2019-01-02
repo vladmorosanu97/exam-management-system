@@ -6,7 +6,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ExamsSystem.BusinessLogic.Implementation\ExamsSystem.BusinessLogic.Implementation.csproj" />
+    <ProjectReference Include="..\ExamsSystem.BusinessLogic.Interfaces\ExamsSystem.BusinessLogic.Interfaces.csproj" />
     <ProjectReference Include="..\ExamsSystem.Data.Implementation\ExamsSystem.Data.Implementation.csproj" />
+    <ProjectReference Include="..\ExamsSystem.Data.Interfaces\ExamsSystem.Data.Interfaces.csproj" />
   </ItemGroup>
 
   <ItemGroup>
