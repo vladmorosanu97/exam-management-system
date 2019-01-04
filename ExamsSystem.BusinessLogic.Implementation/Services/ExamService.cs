@@ -12,10 +12,13 @@ namespace ExamsSystem.BusinessLogic.Implementation.Services
     public class ExamService: IExamService
     {
         private readonly IExamRepository _examRepository;
+        private readonly IClassroomRepository _classroomRepository;
 
-        public ExamService(IExamRepository examRepository)
+        public ExamService(IExamRepository examRepository,
+            IClassroomRepository classroomRepository)
         {
             _examRepository = examRepository;
+            _classroomRepository = classroomRepository;
         }
 
         public void GetData()
@@ -25,21 +28,64 @@ namespace ExamsSystem.BusinessLogic.Implementation.Services
 
         public ExamBlModel GetExamById(int professorId, int examId)
         {
-            return _examRepository.GetExamById(professorId, examId).GetExamBlModel();
+            return _examRepository.GetExamById(professorId, examId).GetBlModel();
         }
 
         public IEnumerable<ExamBlModel> GetExamsByProfessorId(int professorId)
         {
-            return _examRepository.GetExamsByProfessorId(professorId).Select(c => c.GetExamBlModel());
+            return _examRepository.GetExamsByProfessorId(professorId).Select(c => c.GetBlModel());
         }
 
-        public void CreateExam(ExamBlModel exam)
+        public void CreateExam(ExamBlModel exam, List<int> classroomsList)
         {
-            _examRepository.CreateExam(exam.GetDataModel());
+            var classrooms = new List<ClassroomBlModel>();
+            foreach (var classroomId in classroomsList)
+            {
+                var classroom = _classroomRepository.GetClassroomById(classroomId);
+                classrooms.Add(classroom.GetBlModel());
+            }
+
+            var examId = _examRepository.CreateExam(exam.GetDataModel());
+
+            exam.Id = examId;
+            var classroomExams = new List<ClassroomExamBlModel>();
+            
+            foreach (var classroom in classrooms)
+            {
+                var classroomExam = new ClassroomExamBlModel()
+                {
+                    ClassroomId = classroom.Id,
+                    ExamId = exam.Id
+                };
+                classroomExams.Add(classroomExam);
+            }
+
+            exam.ClassroomExams = classroomExams;
+            _examRepository.EditExam(exam.GetDataModel());
         }
 
-        public void EditExam(ExamBlModel exam)
+        public void EditExam(ExamBlModel exam, List<int> classroomsList)
         {
+            var classrooms = new List<ClassroomBlModel>();
+            foreach (var classroomId in classroomsList)
+            {
+                var classroom = _classroomRepository.GetClassroomById(classroomId);
+                classrooms.Add(classroom.GetBlModel());
+            }
+
+            var classroomExams = new List<ClassroomExamBlModel>();
+
+            foreach (var classroom in classrooms)
+            {
+                var classroomExam = new ClassroomExamBlModel()
+                {
+                    ClassroomId = classroom.Id,
+                    ExamId = exam.Id
+                };
+                classroomExams.Add(classroomExam);
+            }
+
+            exam.ClassroomExams = classroomExams;
             _examRepository.EditExam(exam.GetDataModel());
         }
     }

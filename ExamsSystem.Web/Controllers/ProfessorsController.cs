@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.InteropServices.ComTypes;
 using ExamsSystem.BusinessLogic.Interfaces;
 using ExamsSystem.BusinessLogic.Models;
 using ExamsSystem.Data.Models.Models;
+using ExamsSystem.Web.Mappers;
 using ExamsSystem.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,12 +18,15 @@ namespace ExamsSystem.Web.Controllers
     {
         private readonly IExamService _examService;
         private readonly ICourseService _courseService;
+        private readonly IClassroomService _classroomService;
 
         public ProfessorsController(IExamService examService,
-            ICourseService courseService)
+            ICourseService courseService,
+            IClassroomService classroomService)
         {
             _examService = examService;
             _courseService = courseService;
+            _classroomService = classroomService;
         }
 
 
@@ -86,39 +92,26 @@ namespace ExamsSystem.Web.Controllers
         [HttpPost("{professorId:int}/exams")]
         public IActionResult CreateExam([FromBody] ExamViewModel exam)
         {
-//            var classrooms = 
-//            try
-//            {
-//                _examService.CreateExam(exam);
-//                return Ok("Created exam");
-//            }
-//            catch (Exception ex)
-//            {
-//                return BadRequest(ex.Message);
-//            }
-            return Ok();
+           
+
+            var examBlModel = exam.GetBlModel();
+
+            _examService.CreateExam(examBlModel, exam.Classrooms);
+            return NoContent();
         }
 
         [HttpPut("{professorId:int}/exams")]
-        public IActionResult EditExam([FromBody] ExamBlModel examBlModel)
+        public IActionResult EditExam([FromBody] ExamViewModel exam)
         {
-            var exam = _examService.GetExamById(examBlModel.ProfessorId, examBlModel.CourseId);
+            var result = _examService.GetExamById(exam.ProfessorId, exam.Id);
 
-            if (exam == null)
+            if (result == null)
             {
                 return BadRequest("Invalid exam");
             }
 
-            try
-            {
-                _examService.EditExam(examBlModel);
-                return NoContent();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-
+            _examService.EditExam(exam.GetBlModel(), exam.Classrooms);
+            return NoContent();
         }
     }
 }

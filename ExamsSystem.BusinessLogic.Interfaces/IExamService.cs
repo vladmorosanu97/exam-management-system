@@ -9,7 +9,7 @@ namespace ExamsSystem.BusinessLogic.Interfaces
         void GetData();
         ExamBlModel GetExamById(int professorId, int id);
         IEnumerable<ExamBlModel> GetExamsByProfessorId(int professorId);
-        void CreateExam(ExamBlModel exam);
-        void EditExam(ExamBlModel exam);
+        void CreateExam(ExamBlModel exam, List<int> classrooms);
+        void EditExam(ExamBlModel exam, List<int> classrooms);
     }
 }

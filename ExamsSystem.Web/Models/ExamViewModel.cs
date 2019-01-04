@@ -7,6 +7,7 @@ namespace ExamsSystem.Web.Models
 {
     public class ExamViewModel
     {
+        public int Id { get; set; }
         public int CourseId { get; set; }
         public int ProfessorId { get; set; }
 
@@ -17,6 +18,6 @@ namespace ExamsSystem.Web.Models
         public DateTime? StartHour { get; set; }
         public DateTime? FinishHour { get; set; }
         
-        public IList<int> Classrooms { get; set; }
+        public List<int> Classrooms { get; set; }
     }
 }
