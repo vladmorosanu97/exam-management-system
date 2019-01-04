@@ -23,7 +23,7 @@ namespace ExamsSystem.Ioc
 
             // Services
             services.AddScoped<IExamService, ExamService>();
-            services.AddScoped<IExamService, ExamService>();
+            services.AddScoped<ICourseService, CourseService>();
             services.AddScoped<IClassroomService, ClassroomService>();
             return services;
         }

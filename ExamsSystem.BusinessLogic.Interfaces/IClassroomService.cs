@@ -8,5 +8,6 @@ namespace ExamsSystem.BusinessLogic.Interfaces
     public interface IClassroomService
     {
         IEnumerable<ClassroomBlModel> GetClassrooms();
+        ClassroomBlModel GetClassroomById(int classroomId);
     }
 }
