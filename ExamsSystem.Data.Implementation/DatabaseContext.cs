@@ -21,6 +21,7 @@ namespace ExamsSystem.Data.Implementation
         public DbSet<Student> Students { get; set; }
         public DbSet<StudentCourse> StudentCourses { get; set; }
         public DbSet<ProfessorCourse> ProfessorCourses { get; set; }
+        public DbSet<ClassroomExam> ClassroomExams { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<StudentCourse>().HasKey(sc => new { sc.StudentId, sc.CourseId });
@@ -49,15 +50,24 @@ namespace ExamsSystem.Data.Implementation
                 .HasForeignKey(sc => sc.CourseId);
 
 
+            modelBuilder.Entity<ClassroomExam>()
+                .HasOne<Classroom>(pc => pc.Classroom)
+                .WithMany(p => p.ClassroomExams)
+                .HasForeignKey(sc => sc.ClassroomId);
+
+
+            modelBuilder.Entity<ClassroomExam>()
+                .HasOne<Exam>(pc => pc.Exam)
+                .WithMany(c => c.ClassroomExams)
+                .HasForeignKey(sc => sc.ExamId);
+
+
             modelBuilder.Entity<Professor>()
                 .HasKey(p => p.Id);
 
             modelBuilder.Entity<Course>()
                 .HasMany(c => c.Exams)
                 .WithOne(e => e.Course);
-
-            modelBuilder.Entity<Exam>()
-                .HasMany(a => a.Classrooms);
         }
     }
 }

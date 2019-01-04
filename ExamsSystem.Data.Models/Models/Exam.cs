@@ -12,7 +12,7 @@ namespace ExamsSystem.Data.Models.Models
         public DateTime? FinishHour { get; set; }
         public int CourseId { get; set; }
         public Course Course { get; set; }
-        public ICollection<Classroom> Classrooms { get; set; }
+        public ICollection<ClassroomExam> ClassroomExams { get; set; }
         public int ProfessorId { get; set; }
         public Professor  Professor { get; set; }
     }
