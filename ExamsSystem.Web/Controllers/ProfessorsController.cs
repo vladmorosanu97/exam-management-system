@@ -8,10 +8,12 @@ using ExamsSystem.BusinessLogic.Models;
 using ExamsSystem.Data.Models.Models;
 using ExamsSystem.Web.Mappers;
 using ExamsSystem.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExamsSystem.Web.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProfessorsController : ControllerBase
@@ -29,14 +31,14 @@ namespace ExamsSystem.Web.Controllers
             _classroomService = classroomService;
         }
 
-
+        [AllowAnonymous]
         [HttpGet("index")]
         public IActionResult Index()
         {
-            _examService.GetData();
             return Ok();
         }
 
+        [Authorize(Policy = "Professor-Student")]
         [HttpGet("{professorId:int}/courses")]
         public IActionResult GetCoursesByProfessorId(int professorId)
         {
@@ -50,6 +52,7 @@ namespace ExamsSystem.Web.Controllers
             }
         }
 
+        [Authorize(Policy = "Professor-Student")]
         [HttpGet("{professorId:int}/courses/{courseId:int}")]
         public IActionResult GetCoursesByProfessorIdAndCourseId(int professorId, int courseId)
         {
@@ -63,6 +66,7 @@ namespace ExamsSystem.Web.Controllers
             }
         }
 
+        [Authorize(Policy = "Professor-Student")]
         [HttpGet("{professorId:int}/exams/{examId:int}")]
         public IActionResult GetExamById(int professorId, int examId)
         {
@@ -76,6 +80,7 @@ namespace ExamsSystem.Web.Controllers
             }
         }
 
+        [Authorize(Policy = "Professor")]
         [HttpGet("{professorId:int}/exams")]
         public IActionResult GetExamsByProfessorId(int professorId)
         {
@@ -89,6 +94,7 @@ namespace ExamsSystem.Web.Controllers
             }
         }
 
+        [Authorize(Policy = "Professor")]
         [HttpPost("{professorId:int}/exams")]
         public IActionResult CreateExam([FromBody] ExamViewModel exam)
         {
@@ -100,6 +106,7 @@ namespace ExamsSystem.Web.Controllers
             return NoContent();
         }
 
+        [Authorize(Policy = "Professor")]
         [HttpPut("{professorId:int}/exams")]
         public IActionResult EditExam([FromBody] ExamViewModel exam)
         {

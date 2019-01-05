@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ExamsSystem.Data.Models.Models;
+﻿using ExamsSystem.Data.Models.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ExamsSystem.Data.Implementation
 {
-    public sealed class DatabaseContext : DbContext
+    public sealed class DatabaseContext : IdentityDbContext<User, IdentityRole<int>, int>
     {
         public DatabaseContext(DbContextOptions<DatabaseContext> options)
         : base(options)
@@ -68,6 +67,8 @@ namespace ExamsSystem.Data.Implementation
             modelBuilder.Entity<Course>()
                 .HasMany(c => c.Exams)
                 .WithOne(e => e.Course);
+                
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
