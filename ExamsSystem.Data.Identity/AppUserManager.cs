@@ -7,7 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using ExamsSystem.Data.Identity.Mappers;
 using ExamsSystem.Data.Identity.Models;
+using ExamsSystem.Data.Interfaces;
 using ExamsSystem.Data.Models.Models;
+using ExamsSystem.Utils;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -19,37 +21,89 @@ namespace ExamsSystem.Data.Identity
     {
         private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
+        private readonly ICourseRepository _courseRepository;
 
-        public AppUserManager(UserManager<User> userManager, IConfiguration configuration)
+        public AppUserManager(UserManager<User> userManager, 
+            IConfiguration configuration,
+            ICourseRepository courseRepository)
         {
             _userManager = userManager;
             _configuration = configuration;
+            _courseRepository = courseRepository;
         }
 
         public async Task<UserViewModel> Create(UserRegisterViewModel userViewModel)
         {
-            var result = await _userManager.CreateAsync(new User
-            {
-                Email = userViewModel.Email.ToLower(), UserName = userViewModel.Email.ToLower(),
-                FirstName = userViewModel.FirstName, LastName = userViewModel.LastName
-            }, userViewModel.Password);
             
-            if (!result.Succeeded)
+
+            if (!string.IsNullOrEmpty(userViewModel.Role) && userViewModel.Role == UserRoles.Professor)
             {
-                throw new System.Exception("Operation error");
+                var result = await _userManager.CreateAsync(new User
+                {
+                    Email = userViewModel.Email.ToLower(),
+                    UserName = userViewModel.Email.ToLower(),
+                    FirstName = userViewModel.FirstName,
+                    LastName = userViewModel.LastName
+                }, userViewModel.Password);
+
+                if (!result.Succeeded)
+                {
+                    throw new System.Exception("Operation error");
+                }
+
+                var user = await _userManager.FindByEmailAsync(userViewModel.Email);
+                await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, userViewModel.Role));
+
+
+                var userCourses = new List<UserCourse>();
+
+                foreach (var courseId in userViewModel.Courses)
+                {
+                    var course = _courseRepository.GetCourseById(courseId);
+                    userCourses.Add(new UserCourse
+                    {
+                        CourseId = course.Id,
+                        UserId = user.Id
+                    });
+                }
+
+                user.UserCourses = userCourses;
+
+                await _userManager.UpdateAsync(user);
+
+                return user.GetBlModel();
+            }
+            else
+            {
+                return null;
             }
 
-            var user = await _userManager.FindByEmailAsync(userViewModel.Email);
-            await SetUserRole(userViewModel.Role, user);
-            return user.GetBlModel();
-           
+            //            if (!string.IsNullOrEmpty(userViewModel.Role) && userViewModel.Role == UserRoles.Student)
+            //            {
+            //                var result = await _userManager.CreateAsync(new Professor
+            //                {
+            //                    Email = userViewModel.Email.ToLower(),
+            //                    UserName = userViewModel.Email.ToLower(),
+            //                    FirstName = userViewModel.FirstName,
+            //                    LastName = userViewModel.LastName
+            //                }, userViewModel.Password);
+            //
+            //                if (!result.Succeeded)
+            //                {
+            //                    throw new System.Exception("Operation error");
+            //                }
+            //
+            //                var user = await _userManager.FindByEmailAsync(userViewModel.Email);
+            //                await SetUserRole(userViewModel.Role, user);
+            //                return user.GetBlModel();
+            //            }
+
+
+
+
         }
 
-        public async Task SetUserRole(string userRole, User user)
-        {
-            await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, userRole));
-        }
-
+        
         public async Task<UserViewModel> CheckCredentials(string email, string password)
         {
             var user = await _userManager.FindByEmailAsync(email);

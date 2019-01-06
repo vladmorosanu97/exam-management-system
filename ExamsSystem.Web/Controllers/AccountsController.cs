@@ -49,7 +49,7 @@ namespace MicroLicence.Web.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest("Invalid credentials!");
+                return BadRequest("Invalid credentials!" + e.Message);
             }
         }
 

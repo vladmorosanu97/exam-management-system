@@ -29,13 +29,14 @@ namespace ExamsSystem.Ioc
                 o.Password.RequireNonAlphanumeric = false;
                 o.Password.RequiredLength = 8;
                 o.User.RequireUniqueEmail = true;
+
+                
             });
 
             builder = new IdentityBuilder(builder.UserType, builder.Services);
             builder.AddEntityFrameworkStores<DatabaseContext>();
             builder.AddDefaultTokenProviders();
 
-            
             // Repositories
             services.AddScoped<IExamRepository, ExamRepository>();
             services.AddScoped<ICourseRepository, CourseRepository>();

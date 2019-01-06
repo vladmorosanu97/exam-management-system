@@ -14,5 +14,6 @@ namespace ExamsSystem.Data.Identity.Models
         public string FirstName { get; set; }
 
         public string Role { get; set; }
+        public List<int> Courses { get; set; }
     }
 }
