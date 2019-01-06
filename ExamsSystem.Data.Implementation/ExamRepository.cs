@@ -56,7 +56,7 @@ namespace ExamsSystem.Data.Implementation
         {
             return _databaseContext.Exams.Include(e => e.Course)
                 .Include(e => e.ClassroomExams)
-                .Where(c => c.ProfessorId == studentId);
+                .Where(c => c.UserId == studentId);
         }
     }
 }
