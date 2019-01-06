@@ -16,7 +16,7 @@ namespace ExamsSystem.BusinessLogic.Models
         public CourseBlModel Course { get; set; }
 
         public int ProfessorId { get; set; }
-        public ProfessorBlMode Professor { get; set; }
+        public UserBlModel User { get; set; }
         public IList<ClassroomExamBlModel> ClassroomExams { get; set; }
     }
 }

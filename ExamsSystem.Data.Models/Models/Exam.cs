@@ -13,7 +13,7 @@ namespace ExamsSystem.Data.Models.Models
         public int CourseId { get; set; }
         public Course Course { get; set; }
         public IList<ClassroomExam> ClassroomExams { get; set; }
-        public int ProfessorId { get; set; }
-        public Professor  Professor { get; set; }
+        public int UserId { get; set; }
+        public User User { get; set; }
     }
 }

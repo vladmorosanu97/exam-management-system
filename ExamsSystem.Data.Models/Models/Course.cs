@@ -8,8 +8,7 @@ namespace ExamsSystem.Data.Models.Models
     {
         public string Title { get; set; }
         public string Description { get; set; }
-        public IList<StudentCourse> StudentCourses { get; set; }
-        public IList<ProfessorCourse> ProfessorCourses { get; set; }
-        public ICollection<Exam> Exams { get; set; }
+        public List<UserCourse> UserCourses { get; set; }
+        public List<Exam> Exams { get; set; }
     }
 }

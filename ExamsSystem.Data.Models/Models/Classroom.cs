@@ -8,6 +8,6 @@ namespace ExamsSystem.Data.Models.Models
     {
         public string Name { get; set; }
 
-        public IList<ClassroomExam> ClassroomExams { get; set; }
+        public List<ClassroomExam> ClassroomExams { get; set; }
     }
 }

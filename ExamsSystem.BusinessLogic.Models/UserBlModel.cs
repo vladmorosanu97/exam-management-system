@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ExamsSystem.Data.Models.Models
+namespace ExamsSystem.BusinessLogic.Models
 {
-    public class Student: BaseEntity
+    public class UserBlModel
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public IList<StudentCourse> StudentCourses { get; set; }
+        public List<CourseBlModel> Courses { get; set; }
     }
 }
