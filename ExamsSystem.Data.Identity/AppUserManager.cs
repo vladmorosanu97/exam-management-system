@@ -48,7 +48,7 @@ namespace ExamsSystem.Data.Identity
 
                 if (!result.Succeeded)
                 {
-                    throw new System.Exception("Operation error");
+                    throw new System.Exception(result.Errors.FirstOrDefault()?.Description);
                 }
 
                 var user = await _userManager.FindByEmailAsync(userViewModel.Email);
