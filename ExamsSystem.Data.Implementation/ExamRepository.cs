@@ -50,5 +50,12 @@ namespace ExamsSystem.Data.Implementation
             _databaseContext.Exams.Update(item);
             _databaseContext.SaveChanges();
         }
+
+        public IEnumerable<Exam> GetExamsByStudentId(int studentId)
+        {
+            return _databaseContext.Exams.Include(e => e.Course)
+                .Include(e => e.ClassroomExams)
+                .Where(c => c.ProfessorId == studentId);
+        }
     }
 }

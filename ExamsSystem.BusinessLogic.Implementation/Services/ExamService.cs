@@ -88,5 +88,10 @@ namespace ExamsSystem.BusinessLogic.Implementation.Services
             exam.ClassroomExams = classroomExams;
             _examRepository.EditExam(exam.GetDataModel());
         }
+
+        public IEnumerable<ExamBlModel> GetExamsByStudentId(int studentId)
+        {
+            return _examRepository.GetExamsByStudentId(studentId).Select(c => c.GetBlModel());
+        }
     }
 }

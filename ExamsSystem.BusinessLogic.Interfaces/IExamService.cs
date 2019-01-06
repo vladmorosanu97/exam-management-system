@@ -11,5 +11,6 @@ namespace ExamsSystem.BusinessLogic.Interfaces
         IEnumerable<ExamBlModel> GetExamsByProfessorId(int professorId);
         void CreateExam(ExamBlModel exam, List<int> classrooms);
         void EditExam(ExamBlModel exam, List<int> classrooms);
+        IEnumerable<ExamBlModel> GetExamsByStudentId(int studentId);
     }
 }
