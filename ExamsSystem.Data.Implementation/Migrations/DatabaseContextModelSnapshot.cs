@@ -80,87 +80,19 @@ namespace ExamsSystem.Data.Implementation.Migrations
 
                     b.Property<DateTime?>("FinishHour");
 
-                    b.Property<int>("ProfessorId");
-
                     b.Property<DateTime?>("StartHour");
 
                     b.Property<string>("Title");
 
+                    b.Property<int>("UserId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CourseId");
 
-                    b.HasIndex("ProfessorId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Exams");
-                });
-
-            modelBuilder.Entity("ExamsSystem.Data.Models.Models.Professor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Email");
-
-                    b.Property<string>("Name");
-
-                    b.Property<string>("Password");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Professors");
-                });
-
-            modelBuilder.Entity("ExamsSystem.Data.Models.Models.ProfessorCourse", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CourseId");
-
-                    b.Property<int>("ProfessorId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CourseId");
-
-                    b.HasIndex("ProfessorId");
-
-                    b.ToTable("ProfessorCourses");
-                });
-
-            modelBuilder.Entity("ExamsSystem.Data.Models.Models.Student", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Email");
-
-                    b.Property<string>("Name");
-
-                    b.Property<string>("Password");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Students");
-                });
-
-            modelBuilder.Entity("ExamsSystem.Data.Models.Models.StudentCourse", b =>
-                {
-                    b.Property<int>("StudentId");
-
-                    b.Property<int>("CourseId");
-
-                    b.Property<int>("Id");
-
-                    b.HasKey("StudentId", "CourseId");
-
-                    b.HasIndex("CourseId");
-
-                    b.ToTable("StudentCourses");
                 });
 
             modelBuilder.Entity("ExamsSystem.Data.Models.Models.User", b =>
@@ -217,6 +149,25 @@ namespace ExamsSystem.Data.Implementation.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("ExamsSystem.Data.Models.Models.UserCourse", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CourseId");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserCourses");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
@@ -347,35 +298,22 @@ namespace ExamsSystem.Data.Implementation.Migrations
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("ExamsSystem.Data.Models.Models.Professor", "Professor")
+                    b.HasOne("ExamsSystem.Data.Models.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("ProfessorId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("ExamsSystem.Data.Models.Models.ProfessorCourse", b =>
+            modelBuilder.Entity("ExamsSystem.Data.Models.Models.UserCourse", b =>
                 {
                     b.HasOne("ExamsSystem.Data.Models.Models.Course", "Course")
-                        .WithMany("ProfessorCourses")
+                        .WithMany("UserCourses")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("ExamsSystem.Data.Models.Models.Professor", "Professor")
-                        .WithMany("ProfessorCourses")
-                        .HasForeignKey("ProfessorId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("ExamsSystem.Data.Models.Models.StudentCourse", b =>
-                {
-                    b.HasOne("ExamsSystem.Data.Models.Models.Course", "Course")
-                        .WithMany("StudentCourses")
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("ExamsSystem.Data.Models.Models.Student", "Student")
-                        .WithMany("StudentCourses")
-                        .HasForeignKey("StudentId")
+                    b.HasOne("ExamsSystem.Data.Models.Models.User", "User")
+                        .WithMany("UserCourses")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

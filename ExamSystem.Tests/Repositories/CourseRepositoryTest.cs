@@ -1,11 +1,13 @@
-using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using ExamsSystem.Data.Identity.Models;
 using ExamsSystem.Data.Implementation;
 using ExamsSystem.Data.Interfaces;
 using ExamsSystem.Data.Models.Models;
+using ExamSystem.Tests.Models;
 using FluentAssertions;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ExamSystem.Tests
@@ -15,46 +17,66 @@ namespace ExamSystem.Tests
     {
         private DatabaseContext _databaseContext;
         private ICourseRepository _courseRepository;
-        private DbContextOptions<DatabaseContext> _options;
-        public Course course { get; set; }
-        public Professor professor { get; set; }
+        private User _professor;
+        private Course _course;
+        private UserManager<User> _userManagerTest;
+
+        private UserRegisterViewModel InitProfessor()
+        {
+            return new UserRegisterViewModel()
+            {
+                Email = "vlad",
+                FirstName = "vlad",
+                LastName = "Vlad",
+                Password = "Steaua123"
+            };
+        }
+        private async Task<string> InitializeTests()
+        {
+            _databaseContext = DatabaseContextGenerator.GenerateDbContext();
+            _databaseContext.Database.EnsureCreated();
+            _userManagerTest = UserManagerGenerator.GenerateUserManager();
+
+            var userViewModel = InitProfessor();
+            var result = await _userManagerTest.CreateAsync(new User
+            {
+                Email = userViewModel.Email.ToLower(),
+                UserName = userViewModel.Email.ToLower(),
+                FirstName = userViewModel.FirstName,
+                LastName = userViewModel.LastName
+            }, userViewModel.Password);
+
+            if (!result.Succeeded)
+            {
+                throw new System.Exception("Operation error");
+            }
+
+            _professor = await _userManagerTest.FindByEmailAsync(userViewModel.Email);
+
+            _courseRepository = new CourseRepository(_databaseContext);
+
+            _course = InitCourse();
+            _databaseContext.Courses.Add(_course);
+            _databaseContext.SaveChanges();
+
+
+            var professorCourse = new UserCourse
+            {
+                UserId = _professor.Id,
+                CourseId = _course.Id
+            };
+            _databaseContext.UserCourses.Add(professorCourse);
+            _databaseContext.SaveChanges();
+            return "Success";
+        }
 
         [TestInitialize]
         public void InitTests()
         {
-            _options = new DbContextOptionsBuilder<DatabaseContext>().UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=ExamSystem;Trusted_Connection=True;").Options;
 
-            _databaseContext = new DatabaseContext(_options);
-            _courseRepository = new CourseRepository(_databaseContext);
+            List<Task> tasks = new List<Task> { InitializeTests() };
+            Task.WaitAll(tasks.ToArray());
 
-            professor = InitProfessor();
-            ;
-            _databaseContext.Professors.Add(professor);
-            _databaseContext.SaveChanges();
-
-            var id = professor.Id;
-
-            course = InitCourse();
-
-            var professorCourse = new ProfessorCourse
-            {
-                ProfessorId = professor.Id, CourseId = course.Id
-            };
-
-          
-            _databaseContext.Courses.Add(course);
-            _databaseContext.ProfessorCourses.Add(professorCourse);
-            _databaseContext.SaveChanges();
-        }
-
-        public Professor InitProfessor()
-        {
-            return new Professor()
-            {
-                Email = "profesor@email.com",
-                Name = "Professor",
-                Password = "secret"
-            };
         }
 
         public Course InitCourse()
@@ -71,16 +93,13 @@ namespace ExamSystem.Tests
         public void GivenProfessorId_WhenCallGetCoursesByProfessorId_ThenShouldReturnAllCoursesThatHaveProfessorId()
         {
             //arrange
-            var professorId = professor.Id;
+            var professorId = _professor.Id;
 
             //act
             var items = _courseRepository.GetCoursesByProfessorId(professorId);
 
             //assert
-            foreach (var course in items)
-            {
-                course.ProfessorCourses.Select(e => e.ProfessorId).FirstOrDefault().Should().Be(professorId);
-            }
+            items.FirstOrDefault()?.UserCourses.Select(e => e.UserId).FirstOrDefault().Should().Be(professorId);
         }
 
         [TestMethod]
@@ -100,14 +119,14 @@ namespace ExamSystem.Tests
         public void GivenProfessorIdAndCourseId_WhenCallGetCoursesByProfessorIdAndCourseId_ThenShouldReturnTheCorrectCourse()
         {
             //arrange
-            var professorId = professor.Id;
-            var courseId = course.Id;
+            var professorId = _professor.Id;
+            var courseId = _course.Id;
 
             //act
             var expectedCourse = _courseRepository.GetCourseByProfessorIdAndCourseId(professorId, courseId);
 
             //assert
-            expectedCourse.ProfessorCourses.FirstOrDefault(e => e.ProfessorId == professorId).Should().Be(professorId);
+            expectedCourse.UserCourses.Where(e => e.UserId == professorId).Select(e => e.UserId).Should().BeEquivalentTo(professorId);
             expectedCourse.Id.Should().Be(courseId);
         }
 
@@ -116,7 +135,7 @@ namespace ExamSystem.Tests
         {
             //arrange
             var professorId = -1;
-            var courseId = course.Id;
+            var courseId = _course.Id;
 
             //act
             var expectedCourse = _courseRepository.GetCourseByProfessorIdAndCourseId(professorId, courseId);
@@ -129,7 +148,7 @@ namespace ExamSystem.Tests
         public void GivenProfessorIdAndInvalidCourseId_WhenCallGetCoursesByProfessorIdAndCourseId_ThenShouldReturnNull()
         {
             //arrange
-            var professorId = professor.Id;
+            var professorId = _professor.Id;
             var courseId = -1;
 
             //act
@@ -156,9 +175,12 @@ namespace ExamSystem.Tests
         [TestCleanup]
         public void CleanUp()
         {
-            _databaseContext.Courses.Remove(course);
-            _databaseContext.Professors.Remove(professor);
+            _databaseContext.Courses.Remove(_course);
             _databaseContext.SaveChanges();
+
+            _userManagerTest.DeleteAsync(_professor);
         }
     }
 }
+
+

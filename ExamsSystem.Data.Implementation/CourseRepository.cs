@@ -17,12 +17,17 @@ namespace ExamsSystem.Data.Implementation
 
         public IEnumerable<Course> GetCoursesByProfessorId(int professorId)
         {
-            return _databaseContext.ProfessorCourses.Include(pc => pc.Course).Where(pc => pc.ProfessorId == professorId).Select(pc => pc.Course);
+            return _databaseContext.UserCourses.Include(pc => pc.Course).Where(pc => pc.UserId == professorId).Select(pc => pc.Course);
         }
 
         public Course GetCourseByProfessorIdAndCourseId(int professorId, int courseId)
         {
-            return _databaseContext.ProfessorCourses.Include(pc => pc.Course).Where(c => c.ProfessorId == professorId && c.CourseId == courseId).Select(pc => pc.Course).FirstOrDefault();
+            return _databaseContext.UserCourses.Include(pc => pc.Course).Where(c => c.UserId == professorId && c.CourseId == courseId).Select(pc => pc.Course).FirstOrDefault();
+        }
+
+        public Course GetCourseById(int courseId)
+        {
+            return _databaseContext.Courses.FirstOrDefault(c => c.Id == courseId);
         }
     }
 }
