@@ -1,0 +1,34 @@
+<div class="example-container">
+
+
+  <h2 id="title">Register</h2>
+
+  <form [formGroup]="registerForm" (onsubmit)="submit()">
+    <mat-form-field>
+      <input matInput placeholder="First Name" formControlName="firstName">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Last Name" formControlName="lastName">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="email" formControlName="email">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Password" formControlName="password">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Repeate password" formControlName="repeatePassword">
+    </mat-form-field>
+
+    <ng-multiselect-dropdown id="dropdown" [placeholder]="'Exam Classes'" [data]="this.courses" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+    </ng-multiselect-dropdown>
+
+    <button type="submit">Register</button>
+  </form>
+
+
+</div>

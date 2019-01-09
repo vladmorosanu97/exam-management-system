@@ -31,7 +31,7 @@ namespace ExamsSystem.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.RegisterServices(Configuration);
-            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            services.AddCors(o => o.AddPolicy("Identity", builder =>
             {
                 builder.AllowAnyOrigin()
                     .AllowAnyMethod()
@@ -89,7 +89,7 @@ namespace ExamsSystem.Web
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseAuthentication();
-
+            app.UseCors("Identity");
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

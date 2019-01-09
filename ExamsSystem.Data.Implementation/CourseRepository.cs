@@ -29,5 +29,10 @@ namespace ExamsSystem.Data.Implementation
         {
             return _databaseContext.Courses.FirstOrDefault(c => c.Id == courseId);
         }
+
+        public IEnumerable<Course> GetCourses()
+        {
+            return _databaseContext.Courses;
+        }
     }
 }

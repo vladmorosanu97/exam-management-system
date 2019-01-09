@@ -7,7 +7,7 @@ using ExamsSystem.Data.Interfaces;
 
 namespace ExamsSystem.BusinessLogic.Implementation.Services
 {
-    public class CourseService: ICourseService
+    public class CourseService : ICourseService
 
     {
         private readonly ICourseRepository _courseRepository;
@@ -24,6 +24,11 @@ namespace ExamsSystem.BusinessLogic.Implementation.Services
         public CourseBlModel GetCourseByProfessorIdAndCourseId(int professorId, int courseId)
         {
             return _courseRepository.GetCourseByProfessorIdAndCourseId(professorId, courseId).GetBlModel();
+        }
+
+        public IEnumerable<CourseBlModel> GetCourses()
+        {
+            return _courseRepository.GetCourses().Select(c => c.GetBlModel()).ToList();
         }
     }
 }

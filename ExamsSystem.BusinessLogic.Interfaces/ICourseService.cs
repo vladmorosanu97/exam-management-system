@@ -7,5 +7,6 @@ namespace ExamsSystem.BusinessLogic.Interfaces
     {
         IEnumerable<CourseBlModel> GetCoursesByProfessorId(int professorId);
         CourseBlModel GetCourseByProfessorIdAndCourseId(int professorId, int courseId);
+        IEnumerable<CourseBlModel> GetCourses();
     }
 }

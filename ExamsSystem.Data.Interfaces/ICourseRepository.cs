@@ -8,5 +8,6 @@ namespace ExamsSystem.Data.Interfaces
         IEnumerable<Course> GetCoursesByProfessorId(int professorId);
         Course GetCourseByProfessorIdAndCourseId(int professorId, int courseId);
         Course GetCourseById(int courseId);
+        IEnumerable<Course> GetCourses();
     }
 }
