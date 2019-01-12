@@ -9,5 +9,6 @@ namespace ExamsSystem.Data.Models.Models
         public string LastName { get; set; }
 
         public List<UserCourse> UserCourses { get; set; }
+        public List<UserExam> UserExams { get; set; }
     }
 }

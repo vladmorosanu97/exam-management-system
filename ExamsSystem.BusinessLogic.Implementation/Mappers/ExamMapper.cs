@@ -37,7 +37,6 @@ namespace ExamsSystem.BusinessLogic.Implementation.Mappers
                 Course = blItem.Course?.GetDataModel(),
                 Id = blItem.Id,
                 CourseId = blItem.CourseId,
-                UserId = blItem.ProfessorId,
                 ClassroomExams = blItem.ClassroomExams?.Select(e => e.GetDataModel()).ToList()
             };
             return item;

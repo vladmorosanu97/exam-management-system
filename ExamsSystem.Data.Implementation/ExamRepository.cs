@@ -21,16 +21,16 @@ namespace ExamsSystem.Data.Implementation
 //            var items = _databaseContext.Courses.Include(c => c.StudentCourses).ThenInclude(c => c.Student).Where(c => c.Id == 2);
         }
 
-        public Exam GetExamById(int professorId, int examId)
+        public Exam GetExamById(int examId)
         {
-            return _databaseContext.Exams.Include(e => e.Course).FirstOrDefault(e => e.Id == examId && e.UserId == professorId);
+            return _databaseContext.Exams.Include(e => e.Course).FirstOrDefault(e => e.Id == examId);
         }
 
         public IEnumerable<Exam> GetExamsByProfessorId(int professorId)
         {
             return _databaseContext.Exams.Include(e => e.Course)
                 .Include(e => e.ClassroomExams)
-                .Where(c => c.UserId == professorId);
+                .Where(c => c.Course.UserCourses.Select(e => e.UserId).FirstOrDefault() == professorId);
         }
 
         public int CreateExam(Exam exam)
@@ -47,16 +47,16 @@ namespace ExamsSystem.Data.Implementation
             item.ClassroomExams = exam.ClassroomExams;
 
             item.CourseId = exam.CourseId;
-            item.UserId = exam.UserId;
             _databaseContext.Exams.Update(item);
             _databaseContext.SaveChanges();
         }
 
         public IEnumerable<Exam> GetExamsByStudentId(int studentId)
         {
-            return _databaseContext.Exams.Include(e => e.Course)
-                .Include(e => e.ClassroomExams)
-                .Where(c => c.UserId == studentId);
+//            return _databaseContext.Exams.Include(e => e.Course)
+//                .Include(e => e.ClassroomExams)
+//                .Where(c => c.UserId == studentId);
+               return new List<Exam>();
         }
     }
 }

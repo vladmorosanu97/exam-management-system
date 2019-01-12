@@ -28,7 +28,7 @@ namespace ExamsSystem.BusinessLogic.Implementation.Services
 
         public ExamBlModel GetExamById(int professorId, int examId)
         {
-            return _examRepository.GetExamById(professorId, examId).GetBlModel();
+            return _examRepository.GetExamById(examId).GetBlModel();
         }
 
         public IEnumerable<ExamBlModel> GetExamsByProfessorId(int professorId)

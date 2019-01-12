@@ -114,8 +114,7 @@ namespace ExamSystem.Tests
             {
                 Description = "ceva greu",
                 Title = "Partial",
-                CourseId = _course.Id,
-                UserId = _professor.Id
+                CourseId = _course.Id
 
             };
         }
@@ -140,10 +139,9 @@ namespace ExamSystem.Tests
             var items = _examRepository.GetExamsByProfessorId(professorId);
 
             //assert
-            foreach (var exam in items)
-            {
-                exam.UserId.Should().Be(professorId);
-            }
+
+            items.FirstOrDefault()?.Course.UserCourses.Select(e => e.UserId == professorId).Should().NotBeNull();
+            
         }
 
         [TestMethod]
@@ -154,22 +152,20 @@ namespace ExamSystem.Tests
             var examId = _exam.Id;
 
             // act
-            var actualResult = _examRepository.GetExamById(professorId, examId);
+            var actualResult = _examRepository.GetExamById(examId);
 
             // assert
             actualResult.Id.Should().Be(examId);
-            actualResult.UserId.Should().Be(professorId);
         }
 
         [TestMethod]
         public void GivenExamId_WhenCallingGetExamByIdWithInvalidProfessorIdAndValidExamId_ThenShouldReturnNull()
         {
             // arrange
-            var professorId = -1;
-            var examId = _exam.Id;
+            var examId = -1;
 
             // act
-            var actualResult = _examRepository.GetExamById(professorId, examId);
+            var actualResult = _examRepository.GetExamById(examId);
 
             // assert
             actualResult.Should().BeNull();
@@ -183,7 +179,7 @@ namespace ExamSystem.Tests
             var examId = -1;
 
             // act
-            var actualResult = _examRepository.GetExamById(professorId, examId);
+            var actualResult = _examRepository.GetExamById(examId);
 
             // assert
             actualResult.Should().BeNull();
@@ -193,11 +189,10 @@ namespace ExamSystem.Tests
         public void GivenExamId_WhenCallingGetExamByIdWithInvalidProfessorIdAndInvalidExamId_ThenShouldReturnNull()
         {
             // arrange
-            var professorId = -1;
             var examId = -1;
 
             // act
-            var actualResult = _examRepository.GetExamById(professorId, examId);
+            var actualResult = _examRepository.GetExamById(examId);
 
             // assert
             actualResult.Should().BeNull();
@@ -212,7 +207,6 @@ namespace ExamSystem.Tests
             {
                 CourseId = _course.Id,
                 Title = "New Exam",
-                UserId = _professor.Id,
                 ClassroomExams = new List<ClassroomExam>
                 {
                     new ClassroomExam()
@@ -236,11 +230,11 @@ namespace ExamSystem.Tests
         public void GivenExamViewModel_WhenCallingUpdateExam_ThenShouldUpdateExistingExam()
         {
             // arrange
-            var exam = _examRepository.GetExamById(_professor.Id,_exam.Id);
+            var exam = _examRepository.GetExamById(_exam.Id);
             exam.Title = "Test";
             // act
             _examRepository.EditExam(exam);
-            var result = _examRepository.GetExamById(_professor.Id, _exam.Id);
+            var result = _examRepository.GetExamById( _exam.Id);
             // assert
             exam.Title.Should().Be(result.Title);
         }
