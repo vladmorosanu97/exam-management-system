@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CourseService } from 'src/app/shared/services/course.service';
 
 @Component({
   selector: 'app-create-exam',
@@ -6,9 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./create-exam.component.scss']
 })
 export class CreateExamComponent implements OnInit {
-
   dropdownList = [];
   dropdownSettings = {};
+
+  constructor(private _courseServices: CourseService) {}
   ngOnInit() {
     this.dropdownList = [
       { item_id: 1, item_text: 'C2' },
@@ -26,6 +28,10 @@ export class CreateExamComponent implements OnInit {
       itemsShowLimit: this.dropdownList.length,
       allowSearchFilter: true
     };
+
+    this._courseServices.getCourses().subscribe(data => {
+      console.log(data);
+    });
   }
   onItemSelect(item: any) {
     console.log(item);
@@ -33,6 +39,4 @@ export class CreateExamComponent implements OnInit {
   onSelectAll(items: any) {
     console.log(items);
   }
-
-  constructor() { }
 }

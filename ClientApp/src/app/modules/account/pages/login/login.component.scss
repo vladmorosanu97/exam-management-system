@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css?family=Rubik');
+
+.example-container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 5%;
+    width: 500px;
+    font-family: Roboto, Arial, sans-serif;
+    color: gray;
+    //background-image:  url(images/papyrus.svg);
+  }
+
+  .example-container > * {
+    width: 75%;
+  }
+
+#title {
+  font-family: Rubik;
+  color: black;
+}
+
+#dropdown {
+  width: 474px;
+}
+
+mat-form-field {
+  width: 370px;
+}
+
+.small {
+  width: 320px;
+}

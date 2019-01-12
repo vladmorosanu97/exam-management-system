@@ -12,7 +12,7 @@
   }
 
   .example-container > * {
-    width: 100%;
+    width: 75%;
   }
 
 #title {
@@ -22,4 +22,12 @@
 
 #dropdown {
   width: 474px;
+}
+
+mat-form-field {
+  width: 370px;
+}
+
+.small {
+  width: 343px;
 }

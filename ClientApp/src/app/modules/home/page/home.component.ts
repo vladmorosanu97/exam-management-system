@@ -1,4 +1,6 @@
+import { AuthService } from './../../../shared/services/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { UserAuthenticated } from 'src/app/shared/models/user-authenticated-model';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
-  constructor() { }
+  user: any;
+  constructor(private _authService: AuthService) { }
 
   ngOnInit() {
+    this.user = this._authService.getUserInfo();
   }
 
 }

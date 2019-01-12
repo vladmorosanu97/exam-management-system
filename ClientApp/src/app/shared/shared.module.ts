@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatDatepickerModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatNativeDateModule, MatButtonModule, MatRippleModule } from '@angular/material';
+import { MatDatepickerModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatNativeDateModule, MatButtonModule, MatRippleModule, MatCard, MatCardModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,7 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatRippleModule,
     BrowserAnimationsModule,
     NgMultiSelectDropDownModule,
-    HttpClientModule
+    HttpClientModule,
+    MatCardModule
   ],
   exports: [
     CommonModule,
@@ -42,6 +43,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     NgMultiSelectDropDownModule,
     HttpClientModule,
+    MatCardModule
   ]
 })
 export class SharedModule { }

@@ -2,33 +2,58 @@
 
 
   <h2 id="title">Register</h2>
+  <mat-card>
+    <form [formGroup]="registerForm">
+      <div class="d-block">
+        <mat-form-field>
+          <input required matInput placeholder="First Name" formControlName="firstName">
+          <mat-error *ngIf="registerForm.get('firstName').hasError">This is a required field</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="d-block">
+        <mat-form-field>
+          <input required matInput placeholder="Last Name" formControlName="lastName">
+          <mat-error *ngIf="registerForm.get('lastName').hasError">This is a required field</mat-error>
+        </mat-form-field>
+      </div>
 
-  <form [formGroup]="registerForm" (onsubmit)="submit()">
-    <mat-form-field>
-      <input matInput placeholder="First Name" formControlName="firstName">
-    </mat-form-field>
+      <div class="d-block">
+        <mat-form-field>
+          <input required matInput placeholder="Email" formControlName="email">
+          <mat-error *ngIf="registerForm.get('email').hasError">This is a required field</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="d-block">
+        <mat-form-field>
+          <input required matInput placeholder="Password" formControlName="password">
+          <mat-error *ngIf="registerForm.get('password').hasError">This is a required field</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="d-block">
+        <mat-form-field>
+          <input required matInput placeholder="Repeate password" formControlName="repeatePassword">
+          <mat-error *ngIf="registerForm.get('repeatePassword').hasError">This is a required field</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="d-block">
+        <mat-form-field>
+          <mat-select placeholder="Your role" required formControlName="role">
+            <mat-option *ngFor="let role of roles" [value]="role">
+              {{role}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="registerForm.get('role').hasError">This is a required field</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="d-block small">
+        <ng-multiselect-dropdown id="dropdown" [placeholder]="'Exam Classes'" [data]="this.courses" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+        </ng-multiselect-dropdown>
+      </div>
 
-    <mat-form-field>
-      <input matInput placeholder="Last Name" formControlName="lastName">
-    </mat-form-field>
+      <button class="margin-top-20 margin-right-10" mat-raised-button color="primary" (click)="submit()">Send</button>
+      <button mat-raised-button color="accent" (click)="login()">Login</button>
 
-    <mat-form-field>
-      <input matInput placeholder="email" formControlName="email">
-    </mat-form-field>
+    </form>
 
-    <mat-form-field>
-      <input matInput placeholder="Password" formControlName="password">
-    </mat-form-field>
-
-    <mat-form-field>
-      <input matInput placeholder="Repeate password" formControlName="repeatePassword">
-    </mat-form-field>
-
-    <ng-multiselect-dropdown id="dropdown" [placeholder]="'Exam Classes'" [data]="this.courses" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
-    </ng-multiselect-dropdown>
-
-    <button type="submit">Register</button>
-  </form>
-
-
+  </mat-card>
 </div>

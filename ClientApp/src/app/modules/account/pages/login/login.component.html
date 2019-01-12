@@ -1,3 +1,27 @@
-<p>
-  login works!
-</p>
+<div class="example-container">
+
+
+    <h2 id="title">Login</h2>
+    <mat-card>
+      <form [formGroup]="loginForm">
+        <div class="d-block">
+          <mat-form-field>
+            <input required matInput placeholder="Email" formControlName="username">
+            <mat-error *ngIf="loginForm.get('username').hasError">This is a required field</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="d-block">
+          <mat-form-field>
+            <input type="password" required matInput placeholder="Password" formControlName="password">
+            <mat-error *ngIf="loginForm.get('password').hasError">This is a required field</mat-error>
+          </mat-form-field>
+        </div>
+
+        <button mat-raised-button color="primary" (click)="submit()" class="margin-right-10">Send</button>
+        <button mat-raised-button color="accent" (click)="register()">Register</button>
+
+      </form>
+
+    </mat-card>
+  </div>

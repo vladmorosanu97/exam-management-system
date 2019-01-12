@@ -1,3 +1,6 @@
+import { AuthInterceptor } from './core/auth-interceptor';
+import { IsAuthenticatedGuard } from './core/guards/is-authenticated.guard';
+import { AuthService } from './shared/services/auth.service';
 import { AccountModule } from './modules/account/account.module';
 import { HomeModule } from './modules/home/home.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,6 +15,10 @@ import { CoreModule } from './core/core.module';
 import { ProfessorModule } from './modules/professor/professor.module';
 import { SharedModule } from './shared/shared.module';
 import { CourseService } from './shared/services/course.service';
+import { UserService } from './shared/services/user.service';
+import { IsProfessorGuard } from './core/guards/is-professor.guard';
+import { IsStudentGuard } from './core/guards/is-student.guard';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -29,7 +36,13 @@ import { CourseService } from './shared/services/course.service';
     AccountModule,
     ProfessorModule
   ],
-  providers: [CapitalizePipe, CourseService],
-  bootstrap: [AppComponent]
+  // tslint:disable-next-line:max-line-length
+  providers: [CapitalizePipe, CourseService, UserService, AuthService, IsAuthenticatedGuard, IsProfessorGuard, IsStudentGuard, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
+  bootstrap: [AppComponent],
+
 })
 export class AppModule { }
