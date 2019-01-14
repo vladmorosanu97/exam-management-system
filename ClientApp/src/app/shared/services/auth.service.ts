@@ -60,6 +60,6 @@ export class AuthService {
 
   getToken() {
     this._user = JSON.parse(localStorage.getItem('user'));
-    return this._user.Token;
+    return this._user ? this._user.Token : null;
   }
 }
