@@ -25,13 +25,13 @@
       </div>
       <div class="d-block">
         <mat-form-field>
-          <input required matInput placeholder="Password" formControlName="password">
+          <input type="password" required matInput placeholder="Password" formControlName="password">
           <mat-error *ngIf="registerForm.get('password').hasError">This is a required field</mat-error>
         </mat-form-field>
       </div>
       <div class="d-block">
         <mat-form-field>
-          <input required matInput placeholder="Repeate password" formControlName="repeatePassword">
+          <input type="password" required matInput placeholder="Repeate password" formControlName="repeatePassword">
           <mat-error *ngIf="registerForm.get('repeatePassword').hasError">This is a required field</mat-error>
         </mat-form-field>
       </div>

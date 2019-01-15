@@ -23,6 +23,7 @@ namespace ExamSystem.Tests
         private IExamRepository _examRepository;
         public Exam _exam { get; set; }
         private User _professor;
+        private User _student;
         private Classroom _classroom;
         private Course _course;
         private UserManager<User> _userManagerTest;
@@ -36,6 +37,16 @@ namespace ExamSystem.Tests
                 FirstName = "vlad",
                 LastName = "Vlad",
                 Password = "Steaua123"
+            };
+        }
+        private UserRegisterViewModel InitStudent()
+        {
+            return new UserRegisterViewModel()
+            {
+                Email = "adelin@gmail.com",
+                FirstName = "Adelin",
+                LastName = "Pamint",
+                Password = "Parola123"
             };
         }
 
@@ -70,6 +81,22 @@ namespace ExamSystem.Tests
 
             _professor = await _userManagerTest.FindByEmailAsync(userViewModel.Email);
 
+            userViewModel = InitStudent();
+            result = await _userManagerTest.CreateAsync(new User
+            {
+                Email = userViewModel.Email.ToLower(),
+                UserName = userViewModel.Email.ToLower(),
+                FirstName = userViewModel.FirstName,
+                LastName = userViewModel.LastName
+            }, userViewModel.Password);
+
+            if (!result.Succeeded)
+            {
+                throw new System.Exception("Operation error");
+            }
+
+            _student = await _userManagerTest.FindByEmailAsync(userViewModel.Email);
+
             _courseRepository = new CourseRepository(_databaseContext);
 
             _course = InitCourse();
@@ -97,6 +124,13 @@ namespace ExamSystem.Tests
 
             _databaseContext.Exams.Add(_exam);
             _databaseContext.SaveChanges();
+
+            var studentExam = new UserExam()
+            {
+                UserId = _student.Id,
+                ExamId = _exam.Id
+            };
+            _databaseContext.UserExams.Add(studentExam);
 
             return "Success";
         }
@@ -239,13 +273,37 @@ namespace ExamSystem.Tests
             exam.Title.Should().Be(result.Title);
         }
 
+        [TestMethod]
+        public void GivenValidStudentId_WhenCallingGetExamsByStudentId_ThenShouldReturnAllExamsOfStudent()
+        {
+            //arrange
+            var studentId = _student.Id;
+            //act
+            var items = _examRepository.GetExamsByStudentId(studentId);
+
+            //assert
+            items.FirstOrDefault()?.Course.UserCourses.Select(e => e.UserId == studentId).Should().NotBeNull();
+        }
+
+        [TestMethod]
+        public void GivenInvalidStudentId_WhenCallingGetExamsByStudentId_ThenShouldReturnNull()
+        {
+            //arrange
+            var studentId = -1;
+            //act
+            var items = _examRepository.GetExamsByStudentId(studentId);
+            //assert
+            items.Should().BeNull();
+        }
+
         [TestCleanup]
         public void CleanUp()
         {
             _databaseContext.Exams.Remove(_exam);
             _databaseContext.Courses.Remove(_course);
+            _databaseContext.Classrooms.Remove(_classroom);
             _databaseContext.SaveChanges();
-
+            _userManagerTest.DeleteAsync(_student);
             _userManagerTest.DeleteAsync(_professor);
         }
     }

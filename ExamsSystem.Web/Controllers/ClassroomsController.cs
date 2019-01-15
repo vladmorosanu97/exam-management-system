@@ -22,6 +22,20 @@ namespace ExamsSystem.Web.Controllers
             _classroomService = classroomService;
         }
 
+        [Authorize(Policy = "Professor-Student")]
+        [HttpGet("{classrooms}")]
+        public IActionResult GetClassrooms()
+        {
+            try
+            {
+                return Ok(_classroomService.GetClassrooms());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
 //        [Authorize(Policy = "Professor")]
 //        [HttpPost("{professorId:int}/exams")]
 //        public IActionResult CreateExam([FromBody] ExamViewModel exam)

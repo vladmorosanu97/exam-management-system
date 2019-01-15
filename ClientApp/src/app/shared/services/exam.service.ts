@@ -2,19 +2,18 @@ import { environment, coursesApi } from './../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CourseModel } from '../models/course-model';
 import { ExamModel } from '../models/exam-model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CourseService {
-  coursesApi = '/Courses';
+export class ExamService {
+
   host = environment.hostApi;
 
   constructor(private _http: HttpClient) { }
 
-  getCourses(): Observable<Array<CourseModel>> {
-    return this._http.get(this.host + coursesApi) as Observable<Array<CourseModel>>;
+  createExam(professorId, exam: ExamModel): Observable<ExamModel> {
+    return this._http.post(this.host + coursesApi + `/${professorId}` + '/exams', exam) as Observable<ExamModel>;;
   }
 }

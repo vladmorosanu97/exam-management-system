@@ -19,6 +19,7 @@ import { UserService } from './shared/services/user.service';
 import { IsProfessorGuard } from './core/guards/is-professor.guard';
 import { IsStudentGuard } from './core/guards/is-student.guard';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     HomeModule,
     SharedModule,
     AccountModule,
-    ProfessorModule
+    ProfessorModule,
+    HttpClientModule
   ],
   // tslint:disable-next-line:max-line-length
   providers: [CapitalizePipe, CourseService, UserService, AuthService, IsAuthenticatedGuard, IsProfessorGuard, IsStudentGuard, {
