@@ -8,7 +8,11 @@
     width: 500px;
     font-family: Roboto, Arial, sans-serif;
     color: gray;
-    //background-image:  url(images/papyrus.svg);
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
   }
   
   .example-container > * {
@@ -20,6 +24,11 @@
   color: black;
 }
 
+button {
+  width: 23%;
+}
+
 #dropdown {
   width: 474px;
+  padding-bottom: 15px;
 }

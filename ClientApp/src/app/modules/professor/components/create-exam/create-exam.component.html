@@ -1,46 +1,58 @@
-<form [formGroup]="examForm">
-  <div class="example-container">
+<div class="example-container">
 
-    <h2 id="title">Create A New Exam</h2>
+  <h2 id="title">Create A New Exam</h2>
+  <mat-card>
+  <form [formGroup]="examForm">
+    
+      <mat-form-field>
+        <input formControlName="title" matInput placeholder="Exam Title">
+      </mat-form-field>
+    
+    
+    
+      <mat-form-field>
+        <textarea formControlName="description" matInput placeholder="Exam Description"></textarea>
+      </mat-form-field>
+    
 
-    <mat-form-field>
-      <input formControlName="title" matInput placeholder="Exam Title">
-    </mat-form-field>
+    
+      <mat-form-field>
+        <input formControlName="date" matInput [matDatepicker]="picker" placeholder="Exam Date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    
 
-    <mat-form-field>
-      <textarea formControlName="description" matInput placeholder="Exam Description"></textarea>
-    </mat-form-field>
+    
+      <mat-form-field>
+        <input formControlName="startHour" matInput placeholder="Exam Start Hour">
+      </mat-form-field>
+    
 
-    <mat-form-field>
-      <input formControlName="date" matInput [matDatepicker]="picker" placeholder="Exam Date">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
+    
+      <mat-form-field>
+        <input formControlName="finishHour" matInput placeholder="Exam End Hour">
+      </mat-form-field>
+    
 
-    <mat-form-field>
-      <input formControlName="startHour" matInput placeholder="Exam Start Hour">
-    </mat-form-field>
+    
+      <mat-form-field>
+        <input formControlName="courseId" matInput placeholder="Exam Course">
+      </mat-form-field>
+    
 
-    <mat-form-field>
-      <input formControlName="finishHour" matInput placeholder="Exam End Hour">
-    </mat-form-field>
+    
+      <ng-multiselect-dropdown id="dropdown"
+        [placeholder]="'Exam Classes'"
+        [data]="classroomsList"
+        [settings]="dropdownSettings"
+        (onSelect)="onItemSelect($event)"
+        (onSelectAll)="onSelectAll($event)"
+      >
+      </ng-multiselect-dropdown>
+    
 
-    <mat-form-field>
-      <input formControlName="course" matInput placeholder="Exam Course">
-    </mat-form-field>
-
-    <ng-multiselect-dropdown formControlName="classrooms" id="dropdown"
-    [placeholder]="'Exam Classes'"
-    [data]="classroomsList"
-    [settings]="dropdownSettings"
-    (onSelect)="onItemSelect($event)"
-    (onSelectAll)="onSelectAll($event)"
-    >
-    </ng-multiselect-dropdown>
-
-    <mat-form-field>
-      <button (click)="createExam()" mat-raised-button>Create Exam</button>
-    </mat-form-field>
-
-  </div>
-</form>
+    <button (click)="createExam()" mat-raised-button>Create Exam</button>
+  </form>
+</mat-card>
+</div>

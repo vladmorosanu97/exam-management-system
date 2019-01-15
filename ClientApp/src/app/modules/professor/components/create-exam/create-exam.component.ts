@@ -29,7 +29,7 @@ export class CreateExamComponent implements OnInit {
     this.examForm = new FormGroup({
       title: new FormControl(''),
       description: new FormControl(''),
-      data: new FormControl(''),
+      date: new FormControl(''),
       startHour: new FormControl(''),
       finishHour: new FormControl(''),
       courseId: new FormControl(''),
@@ -37,7 +37,7 @@ export class CreateExamComponent implements OnInit {
       classroomsList: new FormGroup({
         id: new FormControl(''),
         name: new FormControl('')
-      }),
+      })
     });
 
     // this.dropdownList = [
