@@ -93,5 +93,10 @@ namespace ExamsSystem.BusinessLogic.Implementation.Services
         {
             return _examRepository.GetExamsByStudentId(studentId).Select(c => c.GetBlModel());
         }
+
+        public void MarkPresentAtExams(int userId, int examId)
+        {
+            _examRepository.MarkPresentAtExams(userId,examId);
+        }
     }
 }

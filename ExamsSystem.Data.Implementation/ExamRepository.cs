@@ -58,5 +58,11 @@ namespace ExamsSystem.Data.Implementation
 //                .Where(c => c.UserId == studentId);
                return new List<Exam>();
         }
+
+        public void MarkPresentAtExams(int userId, int examId)
+        {
+            _databaseContext.Add(new UserExam(userId, examId));
+            _databaseContext.SaveChanges();
+        }
     }
 }

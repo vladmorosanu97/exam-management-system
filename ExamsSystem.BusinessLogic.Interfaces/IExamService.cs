@@ -12,5 +12,6 @@ namespace ExamsSystem.BusinessLogic.Interfaces
         void CreateExam(ExamBlModel exam, List<int> classrooms);
         void EditExam(ExamBlModel exam, List<int> classrooms);
         IEnumerable<ExamBlModel> GetExamsByStudentId(int studentId);
+        void MarkPresentAtExams(int userId, int examId);
     }
 }

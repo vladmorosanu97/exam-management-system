@@ -11,5 +11,6 @@ namespace ExamsSystem.Data.Interfaces
         int CreateExam(Exam exam);
         void EditExam(Exam exam);
         IEnumerable<Exam> GetExamsByStudentId(int studentId);
+        void MarkPresentAtExams(int userId, int examId);
     }
 }

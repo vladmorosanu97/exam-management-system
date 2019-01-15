@@ -6,6 +6,14 @@ namespace ExamsSystem.Data.Models.Models
 {
     public class UserExam: BaseEntity
     {
+        private int courseId;
+
+        public UserExam(int userId, int examId)
+        {
+            UserId = userId;
+            ExamId = courseId;
+        }
+
         public int UserId { get; set; }
         public User User { get; set; }
 

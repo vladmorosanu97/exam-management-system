@@ -33,5 +33,13 @@ namespace ExamsSystem.Web.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [Authorize(Policy = "Student")]
+        [HttpPost("{studentId:int}/mark-presence/{examId:int}")]
+        public void MarkPresence(int studentId, int examId)
+        {
+            _examService.MarkPresentAtExams(studentId, examId);
+            
+        }
     }
 }
