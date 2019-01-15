@@ -6,9 +6,10 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CourseService } from './services/course.service';
 import { HttpClientModule } from '@angular/common/http';
+import { CardComponent } from './components/card/card.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [CardComponent],
   imports: [
     CommonModule,
     MatDatepickerModule,
