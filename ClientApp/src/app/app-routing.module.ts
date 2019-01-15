@@ -8,6 +8,7 @@ import { RegisterComponent } from './modules/account/pages/register/register.com
 import { IsAuthenticatedGuard } from './core/guards/is-authenticated.guard';
 import { NotFoundComponent } from './core/not-found/not-found.component';
 import { NotAuthorisedComponent } from './core/not-authorised/not-authorised.component';
+import { CardComponent } from './shared/components/card/card.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [IsAuthenticatedGuard]},
   { path: 'professor/create-exam', component: CreateExamComponent, canActivate: [IsAuthenticatedGuard, IsProfessorGuard] },
   { path: 'not-authorised', component: NotAuthorisedComponent, pathMatch: 'full' },
-  { path: '**', component: NotFoundComponent }
+  { path: '**', component: NotFoundComponent },
+  { path: 'card', component: CardComponent }
 ];
 
 @NgModule({

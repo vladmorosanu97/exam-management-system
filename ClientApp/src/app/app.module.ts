@@ -1,3 +1,4 @@
+import { CardComponent } from './shared/components/card/card.component';
 import { AuthInterceptor } from './core/auth-interceptor';
 import { IsAuthenticatedGuard } from './core/guards/is-authenticated.guard';
 import { AuthService } from './shared/services/auth.service';
